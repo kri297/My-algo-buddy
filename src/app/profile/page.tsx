@@ -200,13 +200,6 @@ export default function ProfilePage() {
                     </span>
                   </div>
                 </div>
-
-                <Link href="/settings" className="sm:mb-2">
-                  <Button variant="outline" size="sm">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Edit Profile
-                  </Button>
-                </Link>
               </div>
 
               {/* XP Progress */}
@@ -243,12 +236,12 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
-                  <Trophy className="w-8 h-8 mx-auto mb-2 text-yellow-500" />
+                <Card className="p-4 text-center bg-gradient-to-br from-yellow-50 to-orange-50 shadow-lg border-2 border-yellow-200 hover:shadow-xl transition-shadow">
+                  <Trophy className="w-8 h-8 mx-auto mb-2 text-yellow-600" />
                   <div className="text-2xl font-bold text-slate-900">
                     {totalPoints}
                   </div>
-                  <div className="text-xs text-slate-600 font-medium">Total Points</div>
+                  <div className="text-xs text-slate-700 font-semibold">Total Points</div>
                 </Card>
               </motion.div>
 
@@ -257,12 +250,12 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
-                  <Flame className="w-8 h-8 mx-auto mb-2 text-orange-500" />
+                <Card className="p-4 text-center bg-gradient-to-br from-orange-50 to-red-50 shadow-lg border-2 border-orange-200 hover:shadow-xl transition-shadow">
+                  <Flame className="w-8 h-8 mx-auto mb-2 text-orange-600" />
                   <div className="text-2xl font-bold text-slate-900">
                     {dayStreak}
                   </div>
-                  <div className="text-xs text-slate-600 font-medium">Day Streak</div>
+                  <div className="text-xs text-slate-700 font-semibold">Day Streak</div>
                 </Card>
               </motion.div>
 
@@ -271,12 +264,12 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
-                  <BookOpen className="w-8 h-8 mx-auto mb-2 text-blue-500" />
+                <Card className="p-4 text-center bg-gradient-to-br from-blue-50 to-cyan-50 shadow-lg border-2 border-blue-200 hover:shadow-xl transition-shadow">
+                  <BookOpen className="w-8 h-8 mx-auto mb-2 text-blue-600" />
                   <div className="text-2xl font-bold text-slate-900">
                     {completedModules}
                   </div>
-                  <div className="text-xs text-slate-600 font-medium">Modules Done</div>
+                  <div className="text-xs text-slate-700 font-semibold">Modules Done</div>
                 </Card>
               </motion.div>
 
@@ -285,18 +278,18 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.25 }}
               >
-                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
-                  <Target className="w-8 h-8 mx-auto mb-2 text-green-500" />
+                <Card className="p-4 text-center bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg border-2 border-green-200 hover:shadow-xl transition-shadow">
+                  <Target className="w-8 h-8 mx-auto mb-2 text-green-600" />
                   <div className="text-2xl font-bold text-slate-900">
                     {completedChallenges}
                   </div>
-                  <div className="text-xs text-slate-600 font-medium">Challenges</div>
+                  <div className="text-xs text-slate-700 font-semibold">Challenges</div>
                 </Card>
               </motion.div>
             </div>
 
             {/* Skill Levels */}
-            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+            <Card className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 shadow-lg border-2 border-blue-200">
               <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-blue-600" />
                 Skill Progress
@@ -317,7 +310,7 @@ export default function ProfilePage() {
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="w-full h-2.5 bg-white rounded-full overflow-hidden shadow-inner border border-slate-200">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
@@ -331,12 +324,12 @@ export default function ProfilePage() {
             </Card>
 
             {/* Weekly Activity */}
-            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+            <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 shadow-lg border-2 border-purple-200">
               <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-purple-500" />
+                <Calendar className="w-5 h-5 text-purple-600" />
                 Weekly Activity
               </h3>
-              <div className="flex items-end justify-between gap-2 h-32">
+              <div className="flex items-end justify-between gap-2 h-32 bg-white rounded-lg p-4 border-2 border-purple-100">
                 {activityData.map((day, index) => (
                   <motion.div
                     key={day.day}
@@ -349,7 +342,7 @@ export default function ProfilePage() {
                       className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-md"
                       style={{ height: "100%" }}
                     />
-                    <span className="text-xs text-slate-500">{day.day}</span>
+                    <span className="text-xs font-medium text-slate-700">{day.day}</span>
                   </motion.div>
                 ))}
               </div>
@@ -359,10 +352,10 @@ export default function ProfilePage() {
           {/* Right Column - Activity & Achievements */}
           <div className="space-y-6">
             {/* Achievements Summary */}
-            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+            <Card className="p-6 bg-gradient-to-br from-yellow-50 to-orange-50 shadow-lg border-2 border-yellow-200">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold text-lg text-slate-900 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-yellow-500" />
+                  <Award className="w-5 h-5 text-yellow-600" />
                   Achievements
                 </h3>
                 <Link href="/achievements">
@@ -374,20 +367,20 @@ export default function ProfilePage() {
               </div>
 
               <div className="flex items-center justify-center mb-4">
-                <div className="relative w-28 h-28">
+                <div className="relative w-28 h-28 bg-white rounded-full p-2 shadow-inner border-2 border-yellow-200">
                   <svg className="w-full h-full transform -rotate-90">
                     <circle
                       cx="56"
                       cy="56"
-                      r="52"
-                      stroke="#e2e8f0"
+                      r="48"
+                      stroke="#fef3c7"
                       strokeWidth="8"
                       fill="none"
                     />
                     <circle
                       cx="56"
                       cy="56"
-                      r="52"
+                      r="48"
                       stroke="url(#gradient)"
                       strokeWidth="8"
                       fill="none"
@@ -412,7 +405,7 @@ export default function ProfilePage() {
               </p>
 
               {achievementsData.length === 0 ? (
-                <div className="mt-4 p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg text-center border border-blue-200">
+                <div className="mt-4 p-4 bg-white rounded-lg text-center border-2 border-yellow-200 shadow-inner">
                   <p className="text-sm text-slate-700 font-medium">
                     Complete lessons and challenges to earn achievements!
                   </p>
@@ -422,7 +415,7 @@ export default function ProfilePage() {
                   {achievementsData.slice(0, 8).map((achievement, i) => (
                     <div
                       key={i}
-                      className="aspect-square bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-2xl shadow-md hover:shadow-lg transition-shadow"
+                      className="aspect-square bg-gradient-to-br from-yellow-300 to-orange-400 rounded-lg flex items-center justify-center text-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-yellow-300"
                     >
                       {achievement.icon || "🏆"}
                     </div>
@@ -432,7 +425,7 @@ export default function ProfilePage() {
             </Card>
 
             {/* Recent Activity */}
-            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+            <Card className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg border-2 border-green-200">
               <h3 className="font-bold text-lg text-slate-900 mb-4">
                 Recent Activity
               </h3>
