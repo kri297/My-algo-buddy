@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import {
   User,
   Trophy,
@@ -71,12 +73,55 @@ const skillLevels = [
 ];
 
 export default function ProfilePage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const { progress } = useProgressStore();
   const { settings } = useSettingsStore();
+  const [userData, setUserData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/signin');
+    }
+  }, [status, router]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (session?.user?.email) {
+        try {
+          const response = await fetch(`/api/users?email=${session.user.email}`);
+          if (response.ok) {
+            const data = await response.json();
+            setUserData(data.user);
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    if (session) {
+      fetchUserData();
+    }
+  }, [session]);
+
+  if (status === 'loading' || loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-slate-600 dark:text-slate-400">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Calculate stats
-  const totalPoints = progress.totalPoints;
-  const level = Math.floor(totalPoints / 100) + 1;
+  const totalPoints = userData?.xp || progress.totalPoints;
+  const level = userData?.level || Math.floor(totalPoints / 100) + 1;
   const xpToNextLevel = 100 - (totalPoints % 100);
   const xpProgress = totalPoints % 100;
 
@@ -117,11 +162,14 @@ export default function ProfilePage() {
 
                 <div className="flex-1 sm:mb-2">
                   <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-                    AlgoBuddy User
+                    {userData?.name || session?.user?.name || 'AlgoBuddy User'}
                   </h1>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    {userData?.email || session?.user?.email}
+                  </p>
                   <div className="flex items-center gap-2 mt-1">
                     <span className={cn("font-semibold", currentRank.color)}>
-                      {currentRank.name}
+                      {userData?.rank || currentRank.name}
                     </span>
                     <span className="text-slate-400">•</span>
                     <span className="text-slate-500 dark:text-slate-400">

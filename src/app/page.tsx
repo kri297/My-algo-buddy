@@ -1,4 +1,9 @@
-import Link from "next/link";
+'use client';
+
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   ArrowRight,
   Play,
@@ -10,6 +15,8 @@ import {
   Layers,
   Binary,
   TreeDeciduous,
+  LogIn,
+  UserPlus,
 } from "lucide-react";
 
 const features = [
@@ -61,6 +68,26 @@ const dataStructures = [
 ];
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/dashboard');
+    }
+  }, [status, router]);
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-slate-600 text-lg">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -98,24 +125,29 @@ export default function Home() {
               learning assistance. Master DSA with hands-on experience.
             </p>
 
-            {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {/* Auth Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link
-                href="/visualizer"
-                className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                href="/auth/signup"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
               >
-                <Play className="w-5 h-5" />
-                Start Visualizing
-                <ArrowRight className="w-5 h-5" />
+                <UserPlus className="w-5 h-5" />
+                Create New Account
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
+              
               <Link
-                href="/learn"
-                className="flex items-center gap-2 px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 rounded-xl font-semibold text-lg transition-all duration-200 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
+                href="/auth/signin"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-700 border-2 border-slate-300 rounded-xl font-semibold text-lg hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all duration-200"
               >
-                <BookOpen className="w-5 h-5" />
-                Start Learning
+                <LogIn className="w-5 h-5" />
+                Sign In
               </Link>
             </div>
+
+            <p className="text-sm text-slate-500">
+              Join thousands of learners mastering DSA
+            </p>
           </div>
 
           {/* Preview mockup */}

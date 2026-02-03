@@ -95,19 +95,26 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('id');
+    const email = searchParams.get('email');
 
-    if (!userId) {
-      return NextResponse.json({ error: 'User ID required' }, { status: 400 });
+    if (!userId && !email) {
+      return NextResponse.json(
+        { error: 'User ID or email required' },
+        { status: 400 }
+      );
     }
 
     await connectDB();
 
-    const user = await User.findById(userId).select('-password');
+    const user = email
+      ? await User.findOne({ email }).select('-password')
+      : await User.findById(userId).select('-password');
+
     if (!user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const progress = await Progress.findOne({ userId });
+    const progress = await Progress.findOne({ userId: user._id });
 
     return NextResponse.json({
       user: {
