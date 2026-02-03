@@ -256,18 +256,18 @@ export default function ProfilePage() {
               </div>
 
               {/* XP Progress */}
-              <div className="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200">
+              <div className="mt-6 bg-blue-50 p-4 rounded-xl border border-blue-200">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold text-slate-900">
                     Level {level} Progress
                   </span>
-                  <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  <span className="text-sm font-bold text-blue-600">
                     {xpProgress}/100 XP
                   </span>
                 </div>
                 <div className="relative w-full bg-white rounded-full h-3 overflow-hidden shadow-inner border border-slate-200">
                   <div
-                    className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
                     style={{ width: `${xpProgress}%` }}
                   />
                 </div>

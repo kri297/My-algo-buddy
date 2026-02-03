@@ -169,7 +169,7 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="mb-8 p-6 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border-2 border-blue-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+          <Card className="mb-8 p-6 bg-white border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
@@ -181,7 +181,7 @@ export default function DashboardPage() {
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <div className="text-4xl font-bold text-blue-600">
                   {user?.xp || 0} XP
                 </div>
                 <p className="text-xs text-slate-600 mt-1 font-medium">Total Points</p>
@@ -192,7 +192,7 @@ export default function DashboardPage() {
                 initial={{ width: 0 }}
                 animate={{ width: `${xpProgress}%` }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="relative h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+                className="relative h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600"
               >
                 <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
               </motion.div>
@@ -273,7 +273,7 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <Card className="p-8 bg-gradient-to-br from-yellow-50 via-orange-50 to-amber-50 border-2 border-yellow-200 shadow-xl">
+          <Card className="p-8 bg-white border-2 border-slate-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-md">
                 <Trophy className="w-6 h-6 text-white" />
