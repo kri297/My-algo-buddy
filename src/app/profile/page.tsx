@@ -78,6 +78,8 @@ export default function ProfilePage() {
   const { progress } = useProgressStore();
   const { settings } = useSettingsStore();
   const [userData, setUserData] = useState<any>(null);
+  const [progressData, setProgressData] = useState<any>(null);
+  const [achievementsData, setAchievementsData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -87,16 +89,31 @@ export default function ProfilePage() {
   }, [status, router]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchAllData = async () => {
       if (session?.user?.email) {
         try {
-          const response = await fetch(`/api/users?email=${session.user.email}`);
-          if (response.ok) {
-            const data = await response.json();
+          const [userRes, progressRes, achievementsRes] = await Promise.all([
+            fetch(`/api/users?email=${session.user.email}`),
+            fetch(`/api/progress?userId=${session.user.id}`),
+            fetch(`/api/achievements?userId=${session.user.id}`)
+          ]);
+
+          if (userRes.ok) {
+            const data = await userRes.json();
             setUserData(data.user);
           }
+
+          if (progressRes.ok) {
+            const data = await progressRes.json();
+            setProgressData(data.progress);
+          }
+
+          if (achievementsRes.ok) {
+            const data = await achievementsRes.json();
+            setAchievementsData(data.achievements || []);
+          }
         } catch (error) {
-          console.error('Error fetching user data:', error);
+          console.error('Error fetching profile data:', error);
         } finally {
           setLoading(false);
         }
@@ -104,26 +121,32 @@ export default function ProfilePage() {
     };
 
     if (session) {
-      fetchUserData();
+      fetchAllData();
     }
   }, [session]);
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-600 dark:text-slate-400">Loading profile...</p>
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4" />
+            <div className="absolute inset-0 rounded-full bg-blue-100 blur-xl opacity-50 animate-pulse"></div>
+          </div>
+          <p className="text-slate-600 font-medium">Loading profile...</p>
         </div>
       </div>
     );
   }
 
-  // Calculate stats
-  const totalPoints = userData?.xp || progress.totalPoints;
-  const level = userData?.level || Math.floor(totalPoints / 100) + 1;
+  // Calculate stats from real database data
+  const totalPoints = userData?.xp || 0;
+  const level = userData?.level || 1;
   const xpToNextLevel = 100 - (totalPoints % 100);
   const xpProgress = totalPoints % 100;
+  const completedModules = progressData?.totalAlgorithmsCompleted || 0;
+  const completedChallenges = progressData?.totalDataStructuresCompleted || 0;
+  const dayStreak = 0; // Can be calculated from user's last activity
 
   const ranks = [
     { min: 0, name: "Beginner", color: "text-slate-500" },
@@ -141,7 +164,7 @@ export default function ProfilePage() {
     );
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Profile Header */}
         <motion.div
@@ -149,7 +172,7 @@ export default function ProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           className="relative mb-8"
         >
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden shadow-xl border-2 border-slate-200 bg-white">
             {/* Banner */}
             <div className="h-32 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600" />
 
@@ -161,18 +184,18 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="flex-1 sm:mb-2">
-                  <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <h1 className="text-2xl font-bold text-slate-900">
                     {userData?.name || session?.user?.name || 'AlgoBuddy User'}
                   </h1>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-slate-600">
                     {userData?.email || session?.user?.email}
                   </p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className={cn("font-semibold", currentRank.color)}>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className={cn("px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100", currentRank.color)}>
                       {userData?.rank || currentRank.name}
                     </span>
                     <span className="text-slate-400">•</span>
-                    <span className="text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-700 font-medium">
                       Level {level}
                     </span>
                   </div>
@@ -189,15 +212,20 @@ export default function ProfilePage() {
               {/* XP Progress */}
               <div className="mt-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
+                  <span className="text-sm font-semibold text-slate-700">
                     Level {level} Progress
                   </span>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">
+                  <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     {xpProgress}/100 XP
                   </span>
                 </div>
-                <Progress value={xpProgress} variant="gradient" />
-                <p className="text-xs text-slate-500 mt-1">
+                <div className="relative w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-500"
+                    style={{ width: `${xpProgress}%` }}
+                  />
+                </div>
+                <p className="text-xs text-slate-600 mt-1">
                   {xpToNextLevel} XP to Level {level + 1}
                 </p>
               </div>
@@ -215,12 +243,12 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1 }}
               >
-                <Card className="p-4 text-center">
+                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
                   <Trophy className="w-8 h-8 mx-auto mb-2 text-yellow-500" />
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <div className="text-2xl font-bold text-slate-900">
                     {totalPoints}
                   </div>
-                  <div className="text-xs text-slate-500">Total Points</div>
+                  <div className="text-xs text-slate-600 font-medium">Total Points</div>
                 </Card>
               </motion.div>
 
@@ -229,12 +257,12 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.15 }}
               >
-                <Card className="p-4 text-center">
+                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
                   <Flame className="w-8 h-8 mx-auto mb-2 text-orange-500" />
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                    {progress.streak}
+                  <div className="text-2xl font-bold text-slate-900">
+                    {dayStreak}
                   </div>
-                  <div className="text-xs text-slate-500">Day Streak</div>
+                  <div className="text-xs text-slate-600 font-medium">Day Streak</div>
                 </Card>
               </motion.div>
 
@@ -243,12 +271,12 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <Card className="p-4 text-center">
+                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
                   <BookOpen className="w-8 h-8 mx-auto mb-2 text-blue-500" />
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                    {progress.completedModules.length}
+                  <div className="text-2xl font-bold text-slate-900">
+                    {completedModules}
                   </div>
-                  <div className="text-xs text-slate-500">Modules Done</div>
+                  <div className="text-xs text-slate-600 font-medium">Modules Done</div>
                 </Card>
               </motion.div>
 
@@ -257,20 +285,20 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.25 }}
               >
-                <Card className="p-4 text-center">
+                <Card className="p-4 text-center bg-white shadow-lg border-2 border-slate-200 hover:shadow-xl transition-shadow">
                   <Target className="w-8 h-8 mx-auto mb-2 text-green-500" />
-                  <div className="text-2xl font-bold text-slate-900 dark:text-white">
-                    {progress.completedExercises.length}
+                  <div className="text-2xl font-bold text-slate-900">
+                    {completedChallenges}
                   </div>
-                  <div className="text-xs text-slate-500">Challenges</div>
+                  <div className="text-xs text-slate-600 font-medium">Challenges</div>
                 </Card>
               </motion.div>
             </div>
 
             {/* Skill Levels */}
-            <Card className="p-6">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-blue-500" />
+            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+              <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-blue-600" />
                 Skill Progress
               </h3>
               <div className="space-y-4">
@@ -282,14 +310,14 @@ export default function ProfilePage() {
                     transition={{ delay: index * 0.05 }}
                   >
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                      <span className="text-sm font-semibold text-slate-800">
                         {skill.name}
                       </span>
-                      <span className="text-sm text-slate-500">
+                      <span className="text-sm font-medium text-slate-600">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
@@ -303,8 +331,8 @@ export default function ProfilePage() {
             </Card>
 
             {/* Weekly Activity */}
-            <Card className="p-6">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+              <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-purple-500" />
                 Weekly Activity
               </h3>
@@ -331,9 +359,9 @@ export default function ProfilePage() {
           {/* Right Column - Activity & Achievements */}
           <div className="space-y-6">
             {/* Achievements Summary */}
-            <Card className="p-6">
+            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="font-bold text-lg text-slate-900 flex items-center gap-2">
                   <Award className="w-5 h-5 text-yellow-500" />
                   Achievements
                 </h3>
@@ -346,30 +374,55 @@ export default function ProfilePage() {
               </div>
 
               <div className="flex items-center justify-center mb-4">
-                <CircularProgress
-                  value={progress.achievements.length}
-                  max={20}
-                  size={100}
-                  variant="success"
-                />
+                <div className="relative w-28 h-28">
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle
+                      cx="56"
+                      cy="56"
+                      r="52"
+                      stroke="#e2e8f0"
+                      strokeWidth="8"
+                      fill="none"
+                    />
+                    <circle
+                      cx="56"
+                      cy="56"
+                      r="52"
+                      stroke="url(#gradient)"
+                      strokeWidth="8"
+                      fill="none"
+                      strokeDasharray={`${(achievementsData.length / 20) * 326.7} 326.7`}
+                      strokeLinecap="round"
+                    />
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#3b82f6" />
+                        <stop offset="100%" stopColor="#8b5cf6" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-slate-900">{achievementsData.length}%</span>
+                  </div>
+                </div>
               </div>
 
-              <p className="text-center text-sm text-slate-500 dark:text-slate-400">
-                {progress.achievements.length} of 20 achievements unlocked
+              <p className="text-center text-sm text-slate-600 font-medium">
+                {achievementsData.length} of 20 achievements unlocked
               </p>
 
-              {progress.achievements.length === 0 ? (
-                <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg text-center">
-                  <p className="text-sm text-slate-500">
+              {achievementsData.length === 0 ? (
+                <div className="mt-4 p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg text-center border border-blue-200">
+                  <p className="text-sm text-slate-700 font-medium">
                     Complete lessons and challenges to earn achievements!
                   </p>
                 </div>
               ) : (
                 <div className="mt-4 grid grid-cols-4 gap-2">
-                  {progress.achievements.slice(0, 8).map((achievement, i) => (
+                  {achievementsData.slice(0, 8).map((achievement, i) => (
                     <div
                       key={i}
-                      className="aspect-square bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-2xl"
+                      className="aspect-square bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-2xl shadow-md hover:shadow-lg transition-shadow"
                     >
                       {achievement.icon || "🏆"}
                     </div>
@@ -379,8 +432,8 @@ export default function ProfilePage() {
             </Card>
 
             {/* Recent Activity */}
-            <Card className="p-6">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-4">
+            <Card className="p-6 bg-white shadow-lg border-2 border-slate-200">
+              <h3 className="font-bold text-lg text-slate-900 mb-4">
                 Recent Activity
               </h3>
               <div className="space-y-4">
@@ -397,10 +450,10 @@ export default function ProfilePage() {
                       <div
                         className={cn(
                           "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0",
-                          activity.type === "lesson" && "bg-blue-100 dark:bg-blue-900/30",
-                          activity.type === "exercise" && "bg-green-100 dark:bg-green-900/30",
-                          activity.type === "achievement" && "bg-yellow-100 dark:bg-yellow-900/30",
-                          activity.type === "streak" && "bg-orange-100 dark:bg-orange-900/30"
+                          activity.type === "lesson" && "bg-blue-100",
+                          activity.type === "exercise" && "bg-green-100",
+                          activity.type === "achievement" && "bg-yellow-100",
+                          activity.type === "streak" && "bg-orange-100"
                         )}
                       >
                         <Icon
@@ -414,14 +467,14 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
+                        <p className="text-sm font-semibold text-slate-900 truncate">
                           {activity.title}
                         </p>
                         <div className="flex items-center gap-2 mt-0.5">
-                          <Badge variant="success" size="sm">
-                            +{activity.points}
-                          </Badge>
-                          <span className="text-xs text-slate-400">
+                          <span className="text-xs font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded">
+                            +{activity.points} XP
+                          </span>
+                          <span className="text-xs text-slate-500">
                             {activity.time}
                           </span>
                         </div>
