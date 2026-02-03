@@ -372,14 +372,14 @@ const flashcards: Flashcard[] = [
 // Category metadata
 const categoryMeta: Record<string, { icon: React.ElementType; color: string }> = {
   'Arrays': { icon: Layers, color: 'from-blue-500 to-cyan-500' },
-  'Linked Lists': { icon: GitBranch, color: 'from-purple-500 to-pink-500' },
+  'Linked Lists': { icon: GitBranch, color: 'from-blue-500 to-cyan-500' },
   'Stacks & Queues': { icon: Layers, color: 'from-orange-500 to-red-500' },
   'Trees': { icon: TreePine, color: 'from-green-500 to-emerald-500' },
-  'Graphs': { icon: Network, color: 'from-indigo-500 to-purple-500' },
+  'Graphs': { icon: Network, color: 'from-blue-500 to-teal-500' },
   'Sorting': { icon: BarChart2, color: 'from-yellow-500 to-orange-500' },
   'Searching': { icon: Zap, color: 'from-cyan-500 to-blue-500' },
   'Hash Tables': { icon: Hash, color: 'from-pink-500 to-rose-500' },
-  'Dynamic Programming': { icon: Brain, color: 'from-violet-500 to-purple-500' },
+  'Dynamic Programming': { icon: Brain, color: 'from-teal-500 to-cyan-500' },
   'Complexity': { icon: Lightbulb, color: 'from-amber-500 to-orange-500' },
 };
 
@@ -556,7 +556,7 @@ export default function FlashcardsPage() {
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
-              className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium shadow-lg"
+              className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-teal-500 text-white font-medium shadow-lg"
             >
               {syncMessage}
             </motion.div>
@@ -572,7 +572,7 @@ export default function FlashcardsPage() {
           >
             <div className="flex items-center gap-3">
               <span className="text-slate-400 text-sm">Sign in to save progress</span>
-              <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium hover:opacity-90 transition">
+              <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm font-medium hover:opacity-90 transition">
                 <LogIn className="w-3.5 h-3.5" />
                 Sign In
               </Link>
@@ -597,7 +597,7 @@ export default function FlashcardsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <Layers className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-4xl font-bold mb-4">DSA Flashcards</h1>
@@ -631,7 +631,7 @@ export default function FlashcardsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             onClick={() => startCategory('all')}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 mb-6 text-left hover:opacity-90 transition-opacity"
+            className="w-full bg-gradient-to-r from-blue-500 to-teal-500 rounded-xl p-6 mb-6 text-left hover:opacity-90 transition-opacity"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -702,7 +702,7 @@ export default function FlashcardsPage() {
   const catMeta = categoryMeta[currentCard.category] || { icon: Layers, color: 'from-slate-600 to-slate-700' };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-8 px-4">
       {/* Animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-50">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-200 rounded-full blur-3xl" />
@@ -773,7 +773,7 @@ export default function FlashcardsPage() {
         <div className="flex items-center gap-4 mb-6">
           <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
+              className="h-full bg-gradient-to-r from-blue-500 to-teal-500"
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
             />
@@ -825,7 +825,7 @@ export default function FlashcardsPage() {
             {/* Back */}
             <div
               className={cn(
-                "absolute inset-0 min-h-[400px] bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-300 rounded-2xl p-8 shadow-xl",
+                "absolute inset-0 min-h-[400px] bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-300 rounded-2xl p-8 shadow-xl",
                 !isFlipped && "invisible"
               )}
               style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}

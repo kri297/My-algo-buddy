@@ -338,7 +338,7 @@ export default function ContactPage() {
             </div>
 
             {/* Response Time */}
-            <div className="bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 rounded-2xl p-6">
+            <div className="bg-gradient-to-br from-primary/10 to-blue-500/10 border border-primary/20 rounded-2xl p-6">
               <div className="flex items-start gap-3">
                 <AlertCircle className="w-5 h-5 text-primary mt-0.5" />
                 <div>

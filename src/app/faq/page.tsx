@@ -324,7 +324,7 @@ export default function FAQPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20 rounded-2xl p-8 text-center"
+          className="mt-12 bg-gradient-to-br from-primary/10 to-blue-500/10 border border-primary/20 rounded-2xl p-8 text-center"
         >
           <h2 className="text-2xl font-bold mb-2">Still have questions?</h2>
           <p className="text-muted-foreground mb-6">

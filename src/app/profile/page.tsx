@@ -180,7 +180,7 @@ export default function ProfilePage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
         <div className="text-center">
           <div className="relative">
             <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4" />
@@ -217,7 +217,7 @@ export default function ProfilePage() {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Profile Header */}
         <motion.div
@@ -227,12 +227,12 @@ export default function ProfilePage() {
         >
           <Card className="overflow-hidden shadow-xl border-2 border-blue-200 bg-white">
             {/* Banner */}
-            <div className="h-32 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+            <div className="h-32 bg-gradient-to-r from-blue-500 to-teal-500" />
 
             <div className="px-6 pb-6 bg-white">
               <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4 -mt-12 sm:-mt-12">
                 {/* Avatar */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold border-4 border-white shadow-lg mx-auto sm:mx-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold border-4 border-white shadow-lg mx-auto sm:mx-0">
                   <User className="w-12 h-12" />
                 </div>
 
@@ -244,7 +244,7 @@ export default function ProfilePage() {
                     {userData?.email || session?.user?.email}
                   </p>
                   <div className="flex items-center justify-center sm:justify-start gap-2 mt-2">
-                    <span className={cn("px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100", currentRank.color)}>
+                    <span className={cn("px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-cyan-100", currentRank.color)}>
                       {userData?.rank || currentRank.name}
                     </span>
                     <span className="text-slate-500">•</span>
@@ -342,7 +342,7 @@ export default function ProfilePage() {
             </div>
 
             {/* Skill Levels */}
-            <Card className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 shadow-lg border-2 border-blue-200">
+            <Card className="p-6 bg-white shadow-lg border-2 border-blue-200">
               <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-blue-600" />
                 Skill Progress
@@ -381,9 +381,9 @@ export default function ProfilePage() {
             </Card>
 
             {/* Weekly Activity */}
-            <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 shadow-lg border-2 border-purple-200">
+            <Card className="p-6 bg-white shadow-lg border-2 border-blue-200">
               <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-purple-600" />
+                <Calendar className="w-5 h-5 text-blue-600" />
                 Weekly Activity
               </h3>
               <div className="flex items-end justify-between gap-2 h-32 bg-white rounded-lg p-4 border-2 border-purple-100">
@@ -396,7 +396,7 @@ export default function ProfilePage() {
                     className="flex-1 flex flex-col items-center gap-2"
                   >
                     <div
-                      className="w-full bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-md"
+                      className="w-full bg-gradient-to-t from-blue-500 to-cyan-500 rounded-t-md"
                       style={{ height: "100%" }}
                     />
                     <span className="text-xs font-medium text-slate-700">{day.day}</span>

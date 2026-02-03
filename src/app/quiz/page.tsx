@@ -554,7 +554,7 @@ export default function QuizPage() {
 
   const getColorClasses = (color: string) => {
     const colors: { [key: string]: { bg: string; text: string; gradient: string } } = {
-      violet: { bg: 'bg-violet-500/10', text: 'text-violet-400', gradient: 'from-violet-500 to-purple-600' },
+      violet: { bg: 'bg-blue-500/10', text: 'text-blue-400', gradient: 'from-blue-500 to-cyan-600' },
       cyan: { bg: 'bg-cyan-500/10', text: 'text-cyan-400', gradient: 'from-cyan-500 to-teal-600' },
       orange: { bg: 'bg-orange-500/10', text: 'text-orange-400', gradient: 'from-orange-500 to-amber-600' },
       green: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', gradient: 'from-emerald-500 to-green-600' },
@@ -645,7 +645,7 @@ export default function QuizPage() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium shadow-lg"
+            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-teal-500 text-white font-medium shadow-lg"
           >
             {syncMessage}
           </motion.div>
@@ -657,11 +657,11 @@ export default function QuizPage() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }} 
           animate={{ opacity: 1, y: 0 }}
-          className="fixed top-4 left-1/2 -translate-x-1/2 z-40 px-4 py-2 rounded-xl bg-slate-800/90 border border-slate-700 backdrop-blur-sm"
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-40 px-4 py-2 rounded-xl bg-blue-50 border-2 border-blue-200"
         >
           <div className="flex items-center gap-3">
             <span className="text-slate-400 text-sm">Sign in to save your progress</span>
-            <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium hover:opacity-90 transition">
+            <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm font-medium hover:opacity-90 transition">
               <LogIn className="w-3.5 h-3.5" />
               Sign In
             </Link>
@@ -681,7 +681,7 @@ export default function QuizPage() {
             <span className="text-sm text-blue-700 font-medium">Test Your Knowledge</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Quiz Arena</span>
+            <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">Quiz Arena</span>
           </h1>
           <p className="text-slate-600 max-w-xl mx-auto">
             Challenge yourself with quizzes. Score 60% or higher to earn XP!
@@ -726,7 +726,7 @@ export default function QuizPage() {
             <span className="text-sm text-slate-600">{Math.round(overallProgress)}%</span>
           </div>
           <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
-            <motion.div className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-purple-500" initial={{ width: 0 }} animate={{ width: `${overallProgress}%` }} transition={{ duration: 1 }} />
+            <motion.div className="h-full bg-gradient-to-r from-blue-500 to-cyan-500" initial={{ width: 0 }} animate={{ width: `${overallProgress}%` }} transition={{ duration: 1 }} />
           </div>
         </motion.div>
 
@@ -805,7 +805,7 @@ export default function QuizPage() {
             <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-xl bg-white rounded-3xl border-2 border-slate-200 overflow-hidden shadow-2xl">
               {quizState === 'intro' && (
                 <div className="p-8 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
                     <GraduationCap className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="text-xl font-bold text-slate-900 mb-2">{quizModule.title}</h2>
@@ -816,7 +816,7 @@ export default function QuizPage() {
                   </div>
                   <div className="flex gap-3 justify-center">
                     <button onClick={() => { setQuizModule(null); setSelectedTopic(null); }} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-200 text-slate-900 text-sm hover:bg-slate-50">Cancel</button>
-                    <button onClick={() => setQuizState('questions')} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm">Start Quiz</button>
+                    <button onClick={() => setQuizState('questions')} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-teal-500 text-white font-medium text-sm">Start Quiz</button>
                   </div>
                 </div>
               )}
@@ -825,7 +825,7 @@ export default function QuizPage() {
                   <div className="flex items-center gap-3 mb-6">
                     <span className="text-sm text-slate-600">Q{currentQuestion + 1}/{quizData[quizModule.id].length}</span>
                     <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all" style={{ width: `${((currentQuestion + 1) / quizData[quizModule.id].length) * 100}%` }} />
+                      <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all" style={{ width: `${((currentQuestion + 1) / quizData[quizModule.id].length) * 100}%` }} />
                     </div>
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 mb-5">{quizData[quizModule.id][currentQuestion].question}</h3>
@@ -853,9 +853,9 @@ export default function QuizPage() {
                   )}
                   <div className="flex justify-end">
                     {!showExplanation ? (
-                      <button onClick={() => setShowExplanation(true)} disabled={selectedAnswer === null} className={cn("px-5 py-2.5 rounded-xl font-medium text-sm", selectedAnswer !== null ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed")}>Check</button>
+                      <button onClick={() => setShowExplanation(true)} disabled={selectedAnswer === null} className={cn("px-5 py-2.5 rounded-xl font-medium text-sm", selectedAnswer !== null ? "bg-gradient-to-r from-blue-500 to-teal-500 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed")}>Check</button>
                     ) : (
-                      <button onClick={handleNextQuestion} className="px-5 py-2.5 rounded-xl font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm">{currentQuestion < 4 ? 'Next' : 'Results'}</button>
+                      <button onClick={handleNextQuestion} className="px-5 py-2.5 rounded-xl font-medium bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm">{currentQuestion < 4 ? 'Next' : 'Results'}</button>
                     )}
                   </div>
                 </div>
@@ -891,7 +891,7 @@ export default function QuizPage() {
                     {quizScore < 3 ? (
                       <>
                         <button onClick={completeQuiz} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-200 text-slate-900 text-sm hover:bg-slate-50">Back</button>
-                        <button onClick={retryQuiz} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium text-sm">Retry</button>
+                        <button onClick={retryQuiz} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-teal-500 text-white font-medium text-sm">Retry</button>
                       </>
                     ) : (
                       <button onClick={completeQuiz} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-medium text-sm">Continue</button>

@@ -62,7 +62,7 @@ export default function DashboardPage() {
 
   if (loading || status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-cyan-50">
         <div className="text-center">
           <div className="relative">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
@@ -79,9 +79,9 @@ export default function DashboardPage() {
   const xpProgress = ((user?.xp || 0) % 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
       {/* Header */}
-      <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
+      <div className="relative bg-gradient-to-r from-blue-500 to-teal-500 overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-2xl animate-pulse"></div>
@@ -225,13 +225,13 @@ export default function DashboardPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="p-6 bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
+            <Card className="p-6 bg-gradient-to-br from-teal-500 to-cyan-500 text-white border-0 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
                   <Code2 className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-purple-100 font-medium">Data Structures</p>
+                  <p className="text-sm text-teal-100 font-medium">Data Structures</p>
                   <p className="text-3xl font-bold">
                     {stats?.progress?.totalDataStructuresCompleted || 0}
                   </p>
@@ -309,7 +309,7 @@ export default function DashboardPage() {
                   Start your learning journey to unlock badges and achievements!
                 </p>
                 <Link href="/learn">
-                  <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg">
+                  <Button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white shadow-lg">
                     <Flame className="w-4 h-4 mr-2" />
                     Start Learning Now
                   </Button>
