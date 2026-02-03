@@ -73,7 +73,13 @@ export default function DashboardPage() {
       </div>
     );
   }
-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+
+  const user = session?.user;
+  const xpToNextLevel = ((user?.level || 1) * 100);
+  const xpProgress = ((user?.xp || 0) % 100);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       {/* Header */}
       <div className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 overflow-hidden">
         {/* Animated background elements */}
@@ -114,7 +120,51 @@ gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-
                   Welcome back, {user?.name}! 
                   <span className="animate-wave inline-block">👋</span>
                 </motion.h1>
-         motion.div
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex items-center gap-3 mt-2"
+                >
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium flex items-center gap-1.5 border border-white/30">
+                    <TrendingUp className="w-4 h-4" />
+                    Level {user?.level}
+                  </span>
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium flex items-center gap-1.5 border border-white/30">
+                    <Award className="w-4 h-4" />
+                    {user?.rank || 'Beginner'}
+                  </span>
+                </motion.div>
+              </div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex gap-3"
+            >
+              <Link href="/learn">
+                <Button className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 font-semibold px-6">
+                  <BookOpen className="w-5 h-5" />
+                  Start Learning
+                </Button>
+              </Link>
+              <Button 
+                variant="outline" 
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/20"
+              >
+                Sign Out
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* XP Progress */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -138,7 +188,21 @@ gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-
               </div>
             </div>
             <div className="relative w-full bg-slate-200 dark:bg-slate-700 rounded-full h-5 overflow-hidden shadow-inner">
-           motion.div
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: `${xpProgress}%` }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+                className="relative h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+              >
+                <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
+              </motion.div>
+            </div>
+          </Card>
+        </motion.div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -196,43 +260,11 @@ gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-
                 </div>
               </div>
             </Card>
-          </motion.divassName="mb-8 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Experience Points
-              </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                {xpProgress}/ 100 XP to Level {(user?.level || 1) + 1}
-              </p>
-            </div>
-            <div className="text-3xl font-bold text-blue-600">
-              {user?.xp || 0} XP
-            </div>
-          </div>
-          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-4 overflow-hidden">
-            <div
-              className="bg-gradient-to-r from-blue-500 to-purple-500 h-full rounded-full transition-all duration-500"
-              style={{ width: `${xpProgress}%` }}
-            />
-          </div>
-        </Card>
+          </motion.div>
+        </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-2xl">
-                🎯
-              </div>
-              <div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Algorithms</p>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                  {stats?.progress?.totalAlgorithmsCompleted || 0}
-                </p>
-              </div>
-            </div>
-         motion.div
+        {/* Achievements */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
@@ -311,39 +343,7 @@ gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-
               </div>
             )}
           </Card>
-        </motion.divhievements */}
-        <Card className="p-6">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
-            Achievements ({achievements.length})
-          </h2>
-          {achievements.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🏆</div>
-              <p className="text-slate-600 dark:text-slate-400">
-                No achievements yet. Start learning to earn badges!
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {achievements.map((achievement: any) => (
-                <div
-                  key={achievement._id}
-                  className="flex items-center gap-3 p-4 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800"
-                >
-                  <div className="text-3xl">{achievement.icon}</div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-slate-900 dark:text-white">
-                      {achievement.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </Card>
+        </motion.div>
       </div>
     </div>
   );
