@@ -22,55 +22,18 @@ import { Button, Card, Progress, CircularProgress, Badge } from "@/components/ui
 import { useProgressStore, useSettingsStore } from "@/store";
 import { cn } from "@/lib/utils";
 
-const activityData = [
-  { day: "Mon", count: 5 },
-  { day: "Tue", count: 8 },
-  { day: "Wed", count: 3 },
-  { day: "Thu", count: 12 },
-  { day: "Fri", count: 7 },
-  { day: "Sat", count: 15 },
-  { day: "Sun", count: 2 },
-];
-
-const recentActivity = [
-  {
-    type: "lesson",
-    title: "Completed Arrays Module",
-    points: 50,
-    time: "2 hours ago",
-    icon: BookOpen,
-  },
-  {
-    type: "exercise",
-    title: "Solved Two Sum Challenge",
-    points: 100,
-    time: "5 hours ago",
-    icon: Code2,
-  },
-  {
-    type: "achievement",
-    title: 'Earned "Quick Learner" badge',
-    points: 25,
-    time: "1 day ago",
-    icon: Award,
-  },
-  {
-    type: "streak",
-    title: "7-day learning streak!",
-    points: 50,
-    time: "2 days ago",
-    icon: Flame,
-  },
-];
-
-const skillLevels = [
-  { name: "Arrays", level: 75, color: "bg-blue-500" },
-  { name: "Linked Lists", level: 60, color: "bg-green-500" },
-  { name: "Trees", level: 45, color: "bg-yellow-500" },
-  { name: "Graphs", level: 30, color: "bg-purple-500" },
-  { name: "Sorting", level: 80, color: "bg-pink-500" },
-  { name: "Searching", level: 65, color: "bg-cyan-500" },
-];
+// Helper function to calculate time ago
+const getTimeAgo = (date: Date) => {
+  const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+  if (seconds < 60) return 'Just now';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes} min ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days} day${days > 1 ? 's' : ''} ago`;
+  return new Date(date).toLocaleDateString();
+};
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
@@ -80,6 +43,9 @@ export default function ProfilePage() {
   const [userData, setUserData] = useState<any>(null);
   const [progressData, setProgressData] = useState<any>(null);
   const [achievementsData, setAchievementsData] = useState<any[]>([]);
+  const [skillProgress, setSkillProgress] = useState<any[]>([]);
+  const [weeklyActivity, setWeeklyActivity] = useState<any[]>([]);
+  const [recentActivity, setRecentActivity] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -111,6 +77,93 @@ export default function ProfilePage() {
           if (achievementsRes.ok) {
             const data = await achievementsRes.json();
             setAchievementsData(data.achievements || []);
+          }
+
+          // Calculate skill progress from completed lessons
+          if (progressRes.ok) {
+            const data = await progressRes.json();
+            const progress = data.progress;
+            
+            // Map completed algorithms to skill categories
+            const skillMap: any = {
+              'Arrays': 0,
+              'Linked Lists': 0,
+              'Trees': 0,
+              'Graphs': 0,
+              'Sorting': 0,
+              'Searching': 0
+            };
+
+            // Count completed lessons per category
+            const completed = progress?.algorithmsCompleted || [];
+            completed.forEach((algo: any) => {
+              const id = algo.algorithmId || '';
+              if (id.includes('array') || id.includes('string')) skillMap['Arrays'] += 10;
+              if (id.includes('linked') || id.includes('list')) skillMap['Linked Lists'] += 10;
+              if (id.includes('tree') || id.includes('binary')) skillMap['Trees'] += 10;
+              if (id.includes('graph') || id.includes('bfs') || id.includes('dfs')) skillMap['Graphs'] += 10;
+              if (id.includes('sort') || id.includes('bubble') || id.includes('quick')) skillMap['Sorting'] += 10;
+              if (id.includes('search') || id.includes('binary-search')) skillMap['Searching'] += 10;
+            });
+
+            const skills = [
+              { name: 'Arrays', level: Math.min(skillMap['Arrays'], 100), color: 'bg-blue-500' },
+              { name: 'Linked Lists', level: Math.min(skillMap['Linked Lists'], 100), color: 'bg-green-500' },
+              { name: 'Trees', level: Math.min(skillMap['Trees'], 100), color: 'bg-yellow-500' },
+              { name: 'Graphs', level: Math.min(skillMap['Graphs'], 100), color: 'bg-purple-500' },
+              { name: 'Sorting', level: Math.min(skillMap['Sorting'], 100), color: 'bg-pink-500' },
+              { name: 'Searching', level: Math.min(skillMap['Searching'], 100), color: 'bg-cyan-500' },
+            ];
+            setSkillProgress(skills);
+
+            // Calculate weekly activity (last 7 days)
+            const today = new Date();
+            const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const activityByDay: any = {};
+            
+            // Initialize all days with 0
+            for (let i = 6; i >= 0; i--) {
+              const date = new Date(today);
+              date.setDate(date.getDate() - i);
+              const dayName = weekDays[date.getDay()];
+              activityByDay[dayName] = 0;
+            }
+
+            // Count activities per day
+            completed.forEach((algo: any) => {
+              if (algo.completedAt) {
+                const date = new Date(algo.completedAt);
+                const daysDiff = Math.floor((today.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+                if (daysDiff < 7) {
+                  const dayName = weekDays[date.getDay()];
+                  activityByDay[dayName] = (activityByDay[dayName] || 0) + 1;
+                }
+              }
+            });
+
+            const weekly = Object.keys(activityByDay).map(day => ({
+              day,
+              count: activityByDay[day]
+            }));
+            setWeeklyActivity(weekly);
+
+            // Build recent activity from completed items
+            const recent: any[] = [];
+            const sortedCompleted = [...completed].sort((a, b) => 
+              new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+            ).slice(0, 4);
+
+            sortedCompleted.forEach((item: any) => {
+              recent.push({
+                type: 'lesson',
+                title: `Completed ${item.algorithmId?.replace(/-/g, ' ') || 'Lesson'}`,
+                points: item.xpEarned || 50,
+                time: getTimeAgo(item.completedAt),
+                icon: BookOpen
+              });
+            });
+
+            setRecentActivity(recent);
           }
         } catch (error) {
           console.error('Error fetching profile data:', error);
@@ -172,9 +225,9 @@ export default function ProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           className="relative mb-8"
         >
-          <Card className="overflow-hidden shadow-xl border-2 border-slate-200 bg-white">
+          <Card className="overflow-hidden shadow-xl border-2 border-blue-200 bg-white">
             {/* Banner */}
-            <div className="h-32 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />
+            <div className="h-32 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
 
             <div className="px-6 pb-6">
               <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12">
@@ -295,7 +348,7 @@ export default function ProfilePage() {
                 Skill Progress
               </h3>
               <div className="space-y-4">
-                {skillLevels.map((skill, index) => (
+                {skillProgress.length > 0 ? skillProgress.map((skill, index) => (
                   <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, x: -20 }}
@@ -319,7 +372,11 @@ export default function ProfilePage() {
                       />
                     </div>
                   </motion.div>
-                ))}
+                )) : (
+                  <div className="text-center py-8">
+                    <p className="text-slate-600 text-sm">Complete lessons to track your skill progress!</p>
+                  </div>
+                )}
               </div>
             </Card>
 
@@ -330,11 +387,11 @@ export default function ProfilePage() {
                 Weekly Activity
               </h3>
               <div className="flex items-end justify-between gap-2 h-32 bg-white rounded-lg p-4 border-2 border-purple-100">
-                {activityData.map((day, index) => (
+                {weeklyActivity.length > 0 ? weeklyActivity.map((day, index) => (
                   <motion.div
                     key={day.day}
                     initial={{ height: 0 }}
-                    animate={{ height: `${(day.count / 15) * 100}%` }}
+                    animate={{ height: `${Math.min((day.count / 10) * 100, 100)}%` }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                     className="flex-1 flex flex-col items-center gap-2"
                   >
@@ -344,7 +401,11 @@ export default function ProfilePage() {
                     />
                     <span className="text-xs font-medium text-slate-700">{day.day}</span>
                   </motion.div>
-                ))}
+                )) : (
+                  <div className="text-center w-full py-8">
+                    <p className="text-slate-600 text-sm">Start learning to see your activity!</p>
+                  </div>
+                )}
               </div>
             </Card>
           </div>
@@ -430,7 +491,7 @@ export default function ProfilePage() {
                 Recent Activity
               </h3>
               <div className="space-y-4">
-                {recentActivity.map((activity, index) => {
+                {recentActivity.length > 0 ? recentActivity.map((activity, index) => {
                   const Icon = activity.icon;
                   return (
                     <motion.div
@@ -474,7 +535,11 @@ export default function ProfilePage() {
                       </div>
                     </motion.div>
                   );
-                })}
+                }) : (
+                  <div className="text-center py-8">
+                    <p className="text-slate-600 text-sm">Your recent activities will appear here</p>
+                  </div>
+                )}
               </div>
             </Card>
           </div>
