@@ -572,7 +572,7 @@ export default function FlashcardsPage() {
           >
             <div className="flex items-center gap-3">
               <span className="text-slate-400 text-sm">Sign in to save progress</span>
-              <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-400 to-teal-400 text-white text-sm font-medium hover:opacity-90 transition">
+            <Link href="/auth/signin" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white text-sm font-medium hover:opacity-90 transition">
                 <LogIn className="w-3.5 h-3.5" />
                 Sign In
               </Link>

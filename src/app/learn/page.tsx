@@ -213,7 +213,7 @@ export default function LearnPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Master Data Structures &{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-fuchsia-500">
               Algorithms
             </span>
           </h1>
@@ -232,8 +232,8 @@ export default function LearnPage() {
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-400 to-cyan-400 flex items-center justify-center">
-                  <Trophy className="w-8 h-8 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+                  <Trophy className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-slate-800">Your Progress</h2>
@@ -253,7 +253,7 @@ export default function LearnPage() {
                     initial={{ width: 0 }}
                     animate={{ width: `${totalProgress.percentage}%` }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-sky-400 to-cyan-400 rounded-full"
+                    className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
                   />
                 </div>
               </div>
@@ -409,7 +409,7 @@ export default function LearnPage() {
                                       href={`/learn/${lesson.slug}`}
                                       className={`group flex items-center gap-4 p-4 rounded-xl transition-all ${
                                         isNext
-                                          ? "bg-gradient-to-r from-sky-50 to-cyan-50 border border-sky-200 hover:border-sky-400 shadow-sm"
+                                          ? "bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-200 hover:border-cyan-400 shadow-sm"
                                           : isCompleted
                                           ? "bg-green-50 border border-green-200 hover:border-green-400"
                                           : "bg-gray-50 border border-gray-200 hover:border-purple-300 hover:bg-purple-50"
@@ -420,7 +420,7 @@ export default function LearnPage() {
                                         isCompleted
                                           ? "bg-green-500"
                                           : isNext
-                                          ? "bg-gradient-to-r from-sky-400 to-cyan-400"
+                                          ? "bg-gradient-to-r from-cyan-500 to-blue-500"
                                           : "bg-gray-300"
                                       }`}>
                                         {isCompleted ? (

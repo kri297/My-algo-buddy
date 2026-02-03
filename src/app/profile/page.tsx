@@ -180,7 +180,7 @@ export default function ProfilePage() {
 
   if (status === 'loading' || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-sky-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-violet-50 to-fuchsia-50 flex items-center justify-center">
         <div className="text-center">
           <div className="relative">
             <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4" />
@@ -217,7 +217,7 @@ export default function ProfilePage() {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-sky-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 to-fuchsia-50 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Profile Header */}
         <motion.div
@@ -227,12 +227,12 @@ export default function ProfilePage() {
         >
           <Card className="overflow-hidden shadow-xl border-2 border-blue-200 bg-white">
             {/* Banner */}
-            <div className="h-32 bg-gradient-to-r from-emerald-400 to-teal-400" />
+            <div className="h-32 bg-gradient-to-r from-violet-500 to-fuchsia-500" />
 
             <div className="px-6 pb-6 bg-white">
               <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4 -mt-12 sm:-mt-12">
                 {/* Avatar */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold border-4 border-white shadow-lg mx-auto sm:mx-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold border-4 border-white shadow-lg mx-auto sm:mx-0">
                   <User className="w-12 h-12" />
                 </div>
 
@@ -317,7 +317,7 @@ export default function ProfilePage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <Card className="p-4 text-center bg-gradient-to-br from-emerald-50 to-sky-50 shadow-lg border-2 border-emerald-200 hover:shadow-xl transition-shadow">
+                <Card className="p-4 text-center bg-gradient-to-br from-violet-50 to-fuchsia-50 shadow-lg border-2 border-violet-200 hover:shadow-xl transition-shadow">
                   <BookOpen className="w-8 h-8 mx-auto mb-2 text-blue-600" />
                   <div className="text-2xl font-bold text-slate-900">
                     {completedModules}
@@ -396,7 +396,7 @@ export default function ProfilePage() {
                     className="flex-1 flex flex-col items-center gap-2"
                   >
                     <div
-                      className="w-full bg-gradient-to-t from-sky-400 to-cyan-400 rounded-t-md"
+                      className="w-full bg-gradient-to-t from-cyan-500 to-blue-500 rounded-t-md"
                       style={{ height: "100%" }}
                     />
                     <span className="text-xs font-medium text-slate-700">{day.day}</span>

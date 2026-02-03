@@ -645,7 +645,7 @@ export default function QuizPage() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 text-white font-medium shadow-lg"
+            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-medium shadow-lg"
           >
             {syncMessage}
           </motion.div>
@@ -661,7 +661,7 @@ export default function QuizPage() {
         >
           <div className="flex items-center gap-3">
             <span className="text-slate-400 text-sm">Sign in to save your progress</span>
-            <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-400 to-teal-400 text-white text-sm font-medium hover:opacity-90 transition">
+            <Link href="/auth/signin" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white text-sm font-medium hover:opacity-90 transition">
               <LogIn className="w-3.5 h-3.5" />
               Sign In
             </Link>
@@ -681,7 +681,7 @@ export default function QuizPage() {
             <span className="text-sm text-blue-700 font-medium">Test Your Knowledge</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Quiz Arena</span>
+            <span className="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Quiz Arena</span>
           </h1>
           <p className="text-slate-600 max-w-xl mx-auto">
             Challenge yourself with quizzes. Score 60% or higher to earn XP!
@@ -805,7 +805,7 @@ export default function QuizPage() {
             <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-xl bg-white rounded-3xl border-2 border-slate-200 overflow-hidden shadow-2xl">
               {quizState === 'intro' && (
                 <div className="p-8 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
                     <GraduationCap className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="text-xl font-bold text-slate-900 mb-2">{quizModule.title}</h2>
@@ -816,7 +816,7 @@ export default function QuizPage() {
                   </div>
                   <div className="flex gap-3 justify-center">
                     <button onClick={() => { setQuizModule(null); setSelectedTopic(null); }} className="px-5 py-2.5 rounded-xl bg-white border-2 border-slate-200 text-slate-900 text-sm hover:bg-slate-50">Cancel</button>
-                    <button onClick={() => setQuizState('questions')} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 text-white font-medium text-sm">Start Quiz</button>
+                    <button onClick={() => setQuizState('questions')} className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-medium text-sm">Start Quiz</button>
                   </div>
                 </div>
               )}
