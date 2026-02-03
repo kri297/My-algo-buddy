@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 const SYSTEM_PROMPT = `You are AlgoBuddy AI, an expert coding assistant specializing in data structures and algorithms. Your role is to help students learn effectively by:
 
@@ -103,8 +103,20 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error('Gemini API error:', errorData);
+      
+      let errorMessage = 'Sorry, I encountered an error.';
+      if (response.status === 404) {
+        errorMessage = 'The Gemini API endpoint was not found. Please verify your API key is correct and has access to the Gemini API.';
+      } else if (response.status === 403) {
+        errorMessage = 'API key access denied. Please check your Gemini API key permissions.';
+      } else if (response.status === 429) {
+        errorMessage = 'Rate limit exceeded. Please try again in a few moments.';
+      } else {
+        errorMessage = `Sorry, I encountered an error (${response.status}). Please try again later.`;
+      }
+      
       return NextResponse.json(
-        { message: `Sorry, I encountered an error (${response.status}). Please check your API key or try again later.` },
+        { message: errorMessage },
         { status: 200 }
       );
     }

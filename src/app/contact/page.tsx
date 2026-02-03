@@ -100,27 +100,27 @@ export default function ContactPage() {
     {
       icon: Mail,
       label: "Email",
-      value: "hello@algobuddy.dev",
-      href: "mailto:hello@algobuddy.dev",
+      value: "krishmishra297@gmail.com",
+      href: "mailto:krishmishra297@gmail.com",
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "San Francisco, CA",
+      value: "Dehradun, India",
       href: null,
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "+91 6397124871",
+      href: "tel:+916397124871",
     },
   ];
 
   const socialLinks = [
-    { icon: Github, label: "GitHub", href: "https://github.com/algobuddy" },
+    { icon: Github, label: "GitHub", href: "https://github.com/kri297" },
     { icon: Twitter, label: "Twitter", href: "https://twitter.com/algobuddy" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/algobuddy" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/krish-mishra297" },
   ];
 
   const faqItems = [
