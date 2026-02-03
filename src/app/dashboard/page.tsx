@@ -95,14 +95,14 @@ export default function DashboardPage() {
             transition={{ duration: 0.5 }}
             className="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
                 className="relative"
               >
-                <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/50 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/50 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold shadow-lg">
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
                 <div className="absolute -bottom-1 -right-1 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
@@ -115,7 +115,7 @@ export default function DashboardPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="text-3xl font-bold text-white flex items-center gap-2"
+                  className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2"
                 >
                   Welcome back, {user?.name}! 
                   <span className="animate-wave inline-block">👋</span>
@@ -141,10 +141,10 @@ export default function DashboardPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="flex gap-3"
+              className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto"
             >
-              <Link href="/learn">
-                <Button className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 font-semibold px-6">
+              <Link href="/learn" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 font-semibold px-4 sm:px-6 text-sm sm:text-base">
                   <BookOpen className="w-5 h-5" />
                   Start Learning
                 </Button>
@@ -152,7 +152,7 @@ export default function DashboardPage() {
               <Button 
                 variant="outline" 
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/20"
+                className="w-full sm:w-auto bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 hover:bg-white/20 text-sm sm:text-base"
               >
                 Sign Out
               </Button>

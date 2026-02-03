@@ -107,7 +107,7 @@ export default function Home() {
             </div>
 
             {/* Main heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-slate-900">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-slate-900 px-4">
               Master{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Data Structures
@@ -119,17 +119,17 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
               Watch algorithms execute step-by-step with interactive visualizations.
               Practice with 300+ quiz questions, 130+ LeetCode problems, and AI-powered
               learning assistance. Master DSA with hands-on experience.
             </p>
 
             {/* Auth Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-6 sm:mb-8 px-4">
               <Link
                 href="/auth/signup"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
               >
                 <UserPlus className="w-5 h-5" />
                 Create New Account
@@ -138,7 +138,7 @@ export default function Home() {
               
               <Link
                 href="/auth/signin"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-700 border-2 border-slate-300 rounded-xl font-semibold text-lg hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all duration-200"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-slate-700 border-2 border-slate-300 rounded-xl font-semibold text-base sm:text-lg hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all duration-200"
               >
                 <LogIn className="w-5 h-5" />
                 Sign In
@@ -162,13 +162,13 @@ export default function Home() {
                   Bubble Sort Visualization
                 </span>
               </div>
-              <div className="p-8 flex flex-col lg:flex-row gap-8 bg-gradient-to-br from-slate-50 to-blue-50/30">
+              <div className="p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 bg-gradient-to-br from-slate-50 to-blue-50/30">
                 {/* Visualization area */}
-                <div className="flex-1 flex items-end justify-center gap-2 h-48">
+                <div className="flex-1 flex items-end justify-center gap-1 sm:gap-2 h-32 sm:h-40 lg:h-48">
                   {[64, 34, 25, 12, 22, 11, 90].map((value, i) => (
                     <div
                       key={i}
-                      className={`w-12 rounded-t-lg transition-all duration-300 shadow-lg ${
+                      className={`w-8 sm:w-10 lg:w-12 rounded-t-lg transition-all duration-300 shadow-lg ${
                         i < 2
                           ? "bg-gradient-to-t from-green-500 to-green-400"
                           : i < 4
@@ -180,7 +180,7 @@ export default function Home() {
                   ))}
                 </div>
                 {/* Code panel */}
-                <div className="flex-1 bg-white rounded-xl p-5 font-mono text-sm shadow-xl border-2 border-slate-200">
+                <div className="flex-1 bg-white rounded-xl p-3 sm:p-4 lg:p-5 font-mono text-xs sm:text-sm shadow-xl border-2 border-slate-200 overflow-x-auto">
                   <div className="text-slate-500">{"// Bubble Sort"}</div>
                   <div className="text-purple-600">
                     {"for"}{" "}

@@ -230,20 +230,20 @@ export default function ProfilePage() {
             <div className="h-32 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
 
             <div className="px-6 pb-6 bg-white">
-              <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12">
+              <div className="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4 -mt-12 sm:-mt-12">
                 {/* Avatar */}
-                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-3xl font-bold border-4 border-white shadow-lg">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold border-4 border-white shadow-lg mx-auto sm:mx-0">
                   <User className="w-12 h-12" />
                 </div>
 
-                <div className="flex-1 sm:mb-2 bg-white">
-                  <h1 className="text-2xl font-bold text-slate-900">
+                <div className="flex-1 sm:mb-2 bg-white text-center sm:text-left">
+                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900">
                     {userData?.name || session?.user?.name || 'AlgoBuddy User'}
                   </h1>
                   <p className="text-sm text-slate-700 font-medium">
                     {userData?.email || session?.user?.email}
                   </p>
-                  <div className="flex items-center gap-2 mt-2">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mt-2">
                     <span className={cn("px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100", currentRank.color)}>
                       {userData?.rank || currentRank.name}
                     </span>
