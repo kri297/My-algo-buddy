@@ -237,10 +237,10 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="flex-1 sm:mb-2">
-                  <h1 className="text-2xl font-bold text-slate-900">
+                  <h1 className="text-2xl font-bold text-slate-800">
                     {userData?.name || session?.user?.name || 'AlgoBuddy User'}
                   </h1>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-slate-600 font-medium">
                     {userData?.email || session?.user?.email}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
@@ -256,22 +256,22 @@ export default function ProfilePage() {
               </div>
 
               {/* XP Progress */}
-              <div className="mt-6">
+              <div className="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-slate-700">
+                  <span className="text-sm font-semibold text-slate-800">
                     Level {level} Progress
                   </span>
                   <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     {xpProgress}/100 XP
                   </span>
                 </div>
-                <div className="relative w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                <div className="relative w-full bg-white rounded-full h-3 overflow-hidden shadow-inner border border-slate-200">
                   <div
                     className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-500"
                     style={{ width: `${xpProgress}%` }}
                   />
                 </div>
-                <p className="text-xs text-slate-600 mt-1">
+                <p className="text-xs text-slate-600 mt-1 font-medium">
                   {xpToNextLevel} XP to Level {level + 1}
                 </p>
               </div>
