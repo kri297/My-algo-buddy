@@ -229,26 +229,26 @@ export default function ProfilePage() {
             {/* Banner */}
             <div className="h-32 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
 
-            <div className="px-6 pb-6">
+            <div className="px-6 pb-6 bg-white">
               <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12">
                 {/* Avatar */}
                 <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-3xl font-bold border-4 border-white shadow-lg">
                   <User className="w-12 h-12" />
                 </div>
 
-                <div className="flex-1 sm:mb-2">
-                  <h1 className="text-2xl font-bold text-slate-800">
+                <div className="flex-1 sm:mb-2 bg-white">
+                  <h1 className="text-2xl font-bold text-slate-900">
                     {userData?.name || session?.user?.name || 'AlgoBuddy User'}
                   </h1>
-                  <p className="text-sm text-slate-600 font-medium">
+                  <p className="text-sm text-slate-700 font-medium">
                     {userData?.email || session?.user?.email}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
                     <span className={cn("px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-100 to-purple-100", currentRank.color)}>
                       {userData?.rank || currentRank.name}
                     </span>
-                    <span className="text-slate-400">•</span>
-                    <span className="text-slate-700 font-medium">
+                    <span className="text-slate-500">•</span>
+                    <span className="text-slate-800 font-medium">
                       Level {level}
                     </span>
                   </div>
@@ -258,7 +258,7 @@ export default function ProfilePage() {
               {/* XP Progress */}
               <div className="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl border border-blue-200">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-slate-800">
+                  <span className="text-sm font-semibold text-slate-900">
                     Level {level} Progress
                   </span>
                   <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -271,7 +271,7 @@ export default function ProfilePage() {
                     style={{ width: `${xpProgress}%` }}
                   />
                 </div>
-                <p className="text-xs text-slate-600 mt-1 font-medium">
+                <p className="text-xs text-slate-700 mt-1 font-medium">
                   {xpToNextLevel} XP to Level {level + 1}
                 </p>
               </div>
