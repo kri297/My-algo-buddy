@@ -169,14 +169,14 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="mb-8 p-6 bg-white border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+          <Card className="mb-8 p-6 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 border-2 border-blue-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-yellow-500" />
                   Experience Points
                 </h2>
-                <p className="text-sm text-slate-600 mt-1">
+                <p className="text-sm text-slate-700 mt-1 font-medium">
                   {xpProgress} / 100 XP to Level {(user?.level || 1) + 1}
                 </p>
               </div>
@@ -184,10 +184,10 @@ export default function DashboardPage() {
                 <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   {user?.xp || 0} XP
                 </div>
-                <p className="text-xs text-slate-500 mt-1">Total Points</p>
+                <p className="text-xs text-slate-600 mt-1 font-medium">Total Points</p>
               </div>
             </div>
-            <div className="relative w-full bg-slate-200 rounded-full h-5 overflow-hidden shadow-inner">
+            <div className="relative w-full bg-white rounded-full h-5 overflow-hidden shadow-inner border-2 border-blue-100">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${xpProgress}%` }}
@@ -255,7 +255,11 @@ export default function DashboardPage() {
                 <div>
                   <p className="text-sm text-green-100 font-medium">Time Spent</p>
                   <p className="text-3xl font-bold">
-                    {Math.floor((stats?.progress?.totalTimeSpent || 0) / 60)} min
+                    {(() => {
+                      const totalSeconds = stats?.progress?.algorithmsCompleted?.reduce((sum: number, algo: any) => sum + (algo.timeSpent || 0), 0) || 0;
+                      const minutes = Math.floor(totalSeconds / 60);
+                      return minutes > 0 ? `${minutes} min` : '0 min';
+                    })()}
                   </p>
                 </div>
               </div>
@@ -269,16 +273,16 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <Card className="p-8 bg-white border-2 border-slate-200 shadow-xl">
+          <Card className="p-8 bg-gradient-to-br from-yellow-50 via-orange-50 to-amber-50 border-2 border-yellow-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-md">
                 <Trophy className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-slate-900">
                   Achievements
                 </h2>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-700 font-medium">
                   {achievements.length} badge{achievements.length !== 1 ? 's' : ''} earned
                 </p>
               </div>
