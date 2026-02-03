@@ -174,12 +174,12 @@ export default function ProfilePage() {
         >
           <Card className="overflow-hidden shadow-xl border-2 border-slate-200 bg-white">
             {/* Banner */}
-            <div className="h-32 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600" />
+            <div className="h-32 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />
 
             <div className="px-6 pb-6">
               <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-12">
                 {/* Avatar */}
-                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold border-4 border-white dark:border-slate-900 shadow-lg">
+                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-3xl font-bold border-4 border-white shadow-lg">
                   <User className="w-12 h-12" />
                 </div>
 

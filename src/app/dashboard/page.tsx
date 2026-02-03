@@ -62,13 +62,13 @@ export default function DashboardPage() {
 
   if (loading || status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="text-center">
           <div className="relative">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
             <div className="absolute inset-0 rounded-full bg-blue-100 blur-xl opacity-50 animate-pulse"></div>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 font-medium">Loading your dashboard...</p>
+          <p className="text-slate-600 font-medium">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -79,9 +79,9 @@ export default function DashboardPage() {
   const xpProgress = ((user?.xp || 0) % 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
-      <div className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 overflow-hidden">
+      <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-2xl animate-pulse"></div>
@@ -169,14 +169,14 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="mb-8 p-6 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+          <Card className="mb-8 p-6 bg-white border-2 border-slate-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-yellow-500" />
                   Experience Points
                 </h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                <p className="text-sm text-slate-600 mt-1">
                   {xpProgress} / 100 XP to Level {(user?.level || 1) + 1}
                 </p>
               </div>
@@ -184,10 +184,10 @@ export default function DashboardPage() {
                 <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   {user?.xp || 0} XP
                 </div>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Total Points</p>
+                <p className="text-xs text-slate-500 mt-1">Total Points</p>
               </div>
             </div>
-            <div className="relative w-full bg-slate-200 dark:bg-slate-700 rounded-full h-5 overflow-hidden shadow-inner">
+            <div className="relative w-full bg-slate-200 rounded-full h-5 overflow-hidden shadow-inner">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${xpProgress}%` }}
@@ -269,23 +269,23 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <Card className="p-8 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 shadow-xl">
+          <Card className="p-8 bg-white border-2 border-slate-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
                 <Trophy className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                <h2 className="text-2xl font-bold text-slate-900">
                   Achievements
                 </h2>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <p className="text-sm text-slate-500">
                   {achievements.length} badge{achievements.length !== 1 ? 's' : ''} earned
                 </p>
               </div>
             </div>
             
             {achievements.length === 0 ? (
-              <div className="text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-700 dark:to-slate-600 rounded-xl">
+              <div className="text-center py-16 bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl border-2 border-blue-100">
                 <motion.div
                   animate={{ 
                     scale: [1, 1.1, 1],
@@ -300,10 +300,10 @@ export default function DashboardPage() {
                 >
                   🏆
                 </motion.div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">
                   No achievements yet
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-md mx-auto">
+                <p className="text-slate-600 mb-6 max-w-md mx-auto">
                   Start your learning journey to unlock badges and achievements!
                 </p>
                 <Link href="/learn">
@@ -324,15 +324,15 @@ export default function DashboardPage() {
                     whileHover={{ scale: 1.05, y: -5 }}
                     className="relative group"
                   >
-                    <div className="flex items-center gap-3 p-5 bg-gradient-to-br from-yellow-50 via-orange-50 to-amber-50 dark:from-yellow-900/20 dark:via-orange-900/20 dark:to-amber-900/20 rounded-xl border-2 border-yellow-200 dark:border-yellow-700 shadow-md hover:shadow-xl transition-all duration-300">
+                    <div className="flex items-center gap-3 p-5 bg-gradient-to-br from-yellow-50 via-orange-50 to-amber-50 rounded-xl border-2 border-yellow-200 shadow-md hover:shadow-xl transition-all duration-300">
                       <div className="text-4xl transform group-hover:scale-110 transition-transform duration-300">
                         {achievement.icon}
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-bold text-slate-900 dark:text-white mb-1">
+                        <h3 className="font-bold text-slate-900 mb-1">
                           {achievement.title}
                         </h3>
-                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                        <p className="text-xs text-slate-600">
                           {achievement.description}
                         </p>
                       </div>
