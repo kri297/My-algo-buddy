@@ -12,7 +12,7 @@ export default function SettingsPage() {
 
   const themes: { value: Theme; label: string; icon: React.ComponentType<{ className?: string }>; color: string }[] = [
     { value: "light", label: "Light", icon: Sun, color: "from-amber-400 to-orange-500" },
-    { value: "dark", label: "Dark", icon: Moon, color: "from-blue-500 to-cyan-600" },
+    { value: "dark", label: "Dark", icon: Moon, color: "from-sky-400 to-cyan-500" },
     { value: "system", label: "System", icon: Laptop, color: "from-cyan-400 to-blue-500" },
   ];
 
@@ -20,7 +20,7 @@ export default function SettingsPage() {
     { value: "python", label: "Python", color: "from-blue-400 to-blue-600" },
     { value: "javascript", label: "JavaScript", color: "from-yellow-400 to-amber-500" },
     { value: "java", label: "Java", color: "from-orange-400 to-red-500" },
-    { value: "cpp", label: "C++", color: "from-blue-400 to-cyan-500" },
+    { value: "cpp", label: "C++", color: "from-sky-400 to-cyan-400" },
   ];
 
   const speeds: { value: AnimationSpeed; label: string; multiplier: string }[] = [
@@ -50,7 +50,7 @@ export default function SettingsPage() {
             className="mb-10"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/25">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-400/25">
                 <Settings className="w-7 h-7 text-white" />
               </div>
               <div>
@@ -69,7 +69,7 @@ export default function SettingsPage() {
               className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center">
                   <Palette className="w-5 h-5 text-white" />
                 </div>
                 <h2 className="text-lg font-bold text-white">Appearance</h2>
@@ -117,7 +117,7 @@ export default function SettingsPage() {
                         className={cn(
                           "w-12 h-12 rounded-xl font-medium transition-all duration-300",
                           settings.fontSize === size
-                            ? "bg-gradient-to-br from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/25 scale-110"
+                            ? "bg-gradient-to-br from-emerald-400 to-cyan-400 text-white shadow-lg shadow-emerald-400/25 scale-110"
                             : "bg-slate-800/50 text-slate-400 hover:bg-slate-700/50 hover:text-white border border-white/5"
                         )}
                       >
@@ -316,7 +316,7 @@ export default function SettingsPage() {
                     className={cn(
                       "w-14 h-7 rounded-full transition-all duration-300 relative",
                       settings.enableVoiceNarration
-                        ? "bg-gradient-to-r from-blue-400 to-cyan-500 shadow-lg shadow-blue-500/25"
+                        ? "bg-gradient-to-r from-emerald-400 to-cyan-400 shadow-lg shadow-emerald-400/25"
                         : "bg-slate-700"
                     )}
                   >

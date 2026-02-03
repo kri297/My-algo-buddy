@@ -57,11 +57,11 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-400/20">
             <Code2 className="w-5 h-5 text-white" />
           </div>
           <span className="font-bold text-xl hidden sm:inline-block">
-            <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">Algo</span>
+            <span className="bg-gradient-to-r from-sky-500 via-cyan-500 to-teal-500 bg-clip-text text-transparent">Algo</span>
             <span className="text-slate-900">Buddy</span>
           </span>
         </Link>
@@ -208,7 +208,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center shadow-lg">
                 <Code2 className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-xl text-slate-900">AlgoBuddy</span>

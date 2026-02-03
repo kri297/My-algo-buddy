@@ -59,10 +59,10 @@ const features = [
 ];
 
 const dataStructures = [
-  { name: "Arrays", icon: Layers, color: "from-blue-500 to-cyan-500" },
+  { name: "Arrays", icon: Layers, color: "from-sky-400 to-cyan-400" },
   { name: "Linked Lists", icon: GitBranch, color: "from-green-500 to-emerald-500" },
   { name: "Trees", icon: TreeDeciduous, color: "from-amber-500 to-orange-500" },
-  { name: "Graphs", icon: GitBranch, color: "from-blue-500 to-cyan-500" },
+  { name: "Graphs", icon: GitBranch, color: "from-sky-400 to-cyan-400" },
   { name: "Stacks & Queues", icon: Layers, color: "from-red-500 to-rose-500" },
   { name: "Heaps", icon: Binary, color: "from-teal-500 to-cyan-500" },
 ];
@@ -79,7 +79,7 @@ export default function Home() {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-sky-50">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-slate-600 text-lg">Loading...</p>
@@ -109,7 +109,7 @@ export default function Home() {
             {/* Main heading */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-slate-900 px-4">
               Master{" "}
-              <span className="bg-gradient-to-r from-blue-500 to-teal-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                 Data Structures
               </span>
               <br />
@@ -129,7 +129,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-6 sm:mb-8 px-4">
               <Link
                 href="/auth/signup"
-                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
               >
                 <UserPlus className="w-5 h-5" />
                 Create New Account
@@ -152,7 +152,7 @@ export default function Home() {
 
           {/* Preview mockup */}
           <div className="mt-16 lg:mt-20 relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-3xl opacity-20 blur-3xl" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-sky-200 to-cyan-200 rounded-3xl opacity-20 blur-3xl" />
             <div className="relative bg-white rounded-2xl shadow-2xl border-2 border-slate-200 overflow-hidden">
               <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-200">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -173,7 +173,7 @@ export default function Home() {
                           ? "bg-gradient-to-t from-green-500 to-green-400"
                           : i < 4
                           ? "bg-gradient-to-t from-blue-500 to-blue-400"
-                          : "bg-gradient-to-t from-blue-500 to-cyan-400"
+                          : "bg-gradient-to-t from-sky-400 to-cyan-300"
                       }`}
                       style={{ height: `${(value / 90) * 100}%` }}
                     />
@@ -268,7 +268,7 @@ export default function Home() {
                   key={index}
                   className="p-6 rounded-xl bg-slate-50 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-teal-600 flex items-center justify-center mb-4 shadow-md">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center mb-4 shadow-md">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-slate-900">{feature.title}</h3>
@@ -283,7 +283,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-500 to-teal-500">
+      <section className="py-20 bg-gradient-to-br from-emerald-400 to-teal-400">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             Ready to Master Algorithms?
@@ -344,7 +344,7 @@ export default function Home() {
               href="/quiz"
               className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border-2 border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 hover:shadow-md"
             >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center shadow-sm">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center shadow-sm">
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <div>

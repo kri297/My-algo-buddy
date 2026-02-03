@@ -62,7 +62,7 @@ export default function DashboardPage() {
 
   if (loading || status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-sky-50">
         <div className="text-center">
           <div className="relative">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
@@ -79,9 +79,9 @@ export default function DashboardPage() {
   const xpProgress = ((user?.xp || 0) % 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-sky-50">
       {/* Header */}
-      <div className="relative bg-gradient-to-r from-blue-500 to-teal-500 overflow-hidden">
+      <div className="relative bg-gradient-to-r from-emerald-400 to-teal-400 overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-2xl animate-pulse"></div>
@@ -309,7 +309,7 @@ export default function DashboardPage() {
                   Start your learning journey to unlock badges and achievements!
                 </p>
                 <Link href="/learn">
-                  <Button className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white shadow-lg">
+                  <Button className="bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-500 hover:to-teal-500 text-white shadow-lg">
                     <Flame className="w-4 h-4 mr-2" />
                     Start Learning Now
                   </Button>

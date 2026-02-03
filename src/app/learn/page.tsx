@@ -35,10 +35,10 @@ const courseStructure = [
     title: "Arrays & Strings",
     description: "Master the fundamentals of arrays and string manipulation",
     icon: BarChart3,
-    color: "from-blue-500 to-cyan-500",
-    bgColor: "bg-blue-500/10",
-    borderColor: "border-blue-500/30",
-    hoverColor: "hover:border-blue-400",
+    color: "from-sky-400 to-cyan-400",
+    bgColor: "bg-sky-400/10",
+    borderColor: "border-sky-400/30",
+    hoverColor: "hover:border-sky-400",
     lessons: [
       { slug: "arrays-intro", title: "Introduction to Arrays", duration: "10 min", xp: 50 },
       { slug: "arrays-operations", title: "Array Operations & Methods", duration: "15 min", xp: 75 },
@@ -53,10 +53,10 @@ const courseStructure = [
     title: "Stacks & Queues",
     description: "Learn LIFO and FIFO data structures",
     icon: Layers,
-    color: "from-blue-500 to-cyan-500",
-    bgColor: "bg-blue-500/10",
-    borderColor: "border-blue-500/30",
-    hoverColor: "hover:border-purple-400",
+    color: "from-sky-400 to-cyan-400",
+    bgColor: "bg-sky-400/10",
+    borderColor: "border-sky-400/30",
+    hoverColor: "hover:border-sky-400",
     lessons: [
       { slug: "stack-intro", title: "Introduction to Stacks", duration: "12 min", xp: 50 },
       { slug: "queue-intro", title: "Introduction to Queues", duration: "12 min", xp: 50 },
@@ -109,7 +109,7 @@ const practiceTools = [
     description: "Watch algorithms in action",
     href: "/visualizer",
     icon: Play,
-    color: "from-blue-500 to-cyan-500",
+    color: "from-sky-400 to-cyan-400",
   },
   {
     title: "Interactive Quizzes",
@@ -213,7 +213,7 @@ export default function LearnPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Master Data Structures &{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">
               Algorithms
             </span>
           </h1>
@@ -232,7 +232,7 @@ export default function LearnPage() {
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-400 to-cyan-400 flex items-center justify-center">
                   <Trophy className="w-8 h-8 text-white" />
                 </div>
                 <div>
@@ -253,7 +253,7 @@ export default function LearnPage() {
                     initial={{ width: 0 }}
                     animate={{ width: `${totalProgress.percentage}%` }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
+                    className="h-full bg-gradient-to-r from-sky-400 to-cyan-400 rounded-full"
                   />
                 </div>
               </div>
@@ -409,7 +409,7 @@ export default function LearnPage() {
                                       href={`/learn/${lesson.slug}`}
                                       className={`group flex items-center gap-4 p-4 rounded-xl transition-all ${
                                         isNext
-                                          ? "bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 hover:border-blue-400 shadow-sm"
+                                          ? "bg-gradient-to-r from-sky-50 to-cyan-50 border border-sky-200 hover:border-sky-400 shadow-sm"
                                           : isCompleted
                                           ? "bg-green-50 border border-green-200 hover:border-green-400"
                                           : "bg-gray-50 border border-gray-200 hover:border-purple-300 hover:bg-purple-50"
@@ -420,7 +420,7 @@ export default function LearnPage() {
                                         isCompleted
                                           ? "bg-green-500"
                                           : isNext
-                                          ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                                          ? "bg-gradient-to-r from-sky-400 to-cyan-400"
                                           : "bg-gray-300"
                                       }`}>
                                         {isCompleted ? (

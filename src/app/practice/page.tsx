@@ -52,7 +52,7 @@ const topics: Topic[] = [
     name: "Arrays & Hashing",
     icon: "📊",
     description: "Fundamental array operations and hash table techniques",
-    color: "from-blue-500 to-cyan-500",
+    color: "from-sky-400 to-cyan-400",
     problems: [
       { id: "1", title: "Two Sum", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/two-sum/", leetcodeId: 1, tags: ["Array", "Hash Table"], companies: ["Google", "Amazon", "Meta"], acceptance: "49.1%", completed: false },
       { id: "2", title: "Contains Duplicate", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/contains-duplicate/", leetcodeId: 217, tags: ["Array", "Hash Table", "Sorting"], companies: ["Amazon", "Apple"], acceptance: "61.0%", completed: false },
@@ -71,7 +71,7 @@ const topics: Topic[] = [
     name: "Two Pointers",
     icon: "👆",
     description: "Technique using two pointers to solve array problems",
-    color: "from-blue-500 to-cyan-500",
+    color: "from-sky-400 to-cyan-400",
     problems: [
       { id: "11", title: "Valid Palindrome", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/valid-palindrome/", leetcodeId: 125, tags: ["Two Pointers", "String"], companies: ["Meta", "Microsoft"], acceptance: "44.2%", completed: false },
       { id: "12", title: "Two Sum II - Input Array Is Sorted", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/", leetcodeId: 167, tags: ["Array", "Two Pointers"], companies: ["Amazon"], acceptance: "60.0%", completed: false },
@@ -139,7 +139,7 @@ const topics: Topic[] = [
     name: "Linked List",
     icon: "🔗",
     description: "Linear data structure with pointers",
-    color: "from-blue-500 to-teal-500",
+    color: "from-emerald-400 to-teal-400",
     problems: [
       { id: "43", title: "Reverse Linked List", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/reverse-linked-list/", leetcodeId: 206, tags: ["Linked List", "Recursion"], companies: ["Amazon", "Microsoft", "Apple"], acceptance: "73.2%", completed: false },
       { id: "44", title: "Merge Two Sorted Lists", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/merge-two-sorted-lists/", leetcodeId: 21, tags: ["Linked List", "Recursion"], companies: ["Amazon", "Microsoft"], acceptance: "62.2%", completed: false },
@@ -256,7 +256,7 @@ const topics: Topic[] = [
     name: "Intervals",
     icon: "📏",
     description: "Working with ranges and intervals",
-    color: "from-blue-500 to-cyan-500",
+    color: "from-sky-400 to-cyan-400",
     problems: [
       { id: "106", title: "Merge Intervals", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/merge-intervals/", leetcodeId: 56, tags: ["Array", "Sorting"], companies: ["Meta", "Amazon", "Google"], acceptance: "46.5%", completed: false },
       { id: "107", title: "Insert Interval", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/insert-interval/", leetcodeId: 57, tags: ["Array"], companies: ["Google", "Amazon"], acceptance: "39.0%", completed: false },
@@ -445,7 +445,7 @@ export default function PracticePage() {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
                 <Link href="/" className="flex items-center gap-2 text-slate-900 hover:text-purple-600 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-bold text-xl">AlgoBuddy</span>
@@ -464,7 +464,7 @@ export default function PracticePage() {
                   <span className="text-green-400 font-semibold">{completedCount}/{totalProblems}</span>
                   <span className="text-slate-400 text-sm">solved</span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-xl">
+                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-400/20 to-cyan-400/20 border border-sky-400/30 rounded-xl">
                   <Flame className="w-5 h-5 text-orange-400" />
                   <span className="text-orange-400 font-semibold">{Math.round((completedCount / totalProblems) * 100)}%</span>
                 </div>

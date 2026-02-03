@@ -1956,7 +1956,7 @@ export default function LessonPage() {
 
           {/* Progress */}
           <div className="mt-3 h-1 bg-slate-200 rounded-full overflow-hidden">
-            <motion.div className="h-full bg-gradient-to-r from-blue-500 to-cyan-500" initial={{ width: 0 }} animate={{ width: `${progress}%` }} />
+            <motion.div className="h-full bg-gradient-to-r from-sky-400 to-cyan-400" initial={{ width: 0 }} animate={{ width: `${progress}%` }} />
           </div>
         </div>
       </header>
@@ -2169,7 +2169,7 @@ export default function LessonPage() {
                 <button
                   onClick={handleCompleteLesson}
                   disabled={isCompleting}
-                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-500 hover:to-cyan-500 text-white rounded-2xl font-bold text-lg shadow-lg shadow-sky-400/25 hover:shadow-xl hover:shadow-sky-400/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isCompleting ? (
                     <>

@@ -759,7 +759,7 @@ export default function VisualizerPage() {
       case "searching": return "from-blue-400 to-cyan-500";
       case "found": return "from-green-400 to-emerald-500";
       case "min": return "from-orange-400 to-amber-500";
-      default: return "from-blue-400 to-cyan-500";
+      default: return "from-sky-400 to-cyan-400";
     }
   };
 
@@ -812,7 +812,7 @@ export default function VisualizerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-sky-50">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-200/40 rounded-full blur-3xl" />
@@ -835,10 +835,10 @@ export default function VisualizerPage() {
               </div>
               
               <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-xl border border-gray-200">
-                <button onClick={() => setViewMode("algorithms")} className={cn("px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2", viewMode === "algorithms" ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>
+                <button onClick={() => setViewMode("algorithms")} className={cn("px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2", viewMode === "algorithms" ? "bg-gradient-to-r from-sky-400 to-cyan-400 text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>
                   <TrendingUp className="w-4 h-4" /><span className="hidden sm:inline">Algorithms</span>
                 </button>
-                <button onClick={() => setViewMode("datastructures")} className={cn("px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2", viewMode === "datastructures" ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>
+                <button onClick={() => setViewMode("datastructures")} className={cn("px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2", viewMode === "datastructures" ? "bg-gradient-to-r from-sky-400 to-cyan-400 text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>
                   <Layers className="w-4 h-4" /><span className="hidden sm:inline">Data Structures</span>
                 </button>
               </div>
@@ -860,7 +860,7 @@ export default function VisualizerPage() {
         
         <AnimatePresence>
           {message && (
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl shadow-lg">
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-xl shadow-lg">
               {message}
             </motion.div>
           )}
@@ -882,7 +882,7 @@ export default function VisualizerPage() {
                 <LogIn className="w-5 h-5 text-purple-600" />
                 <span className="text-gray-700">Sign in to save your progress and earn XP!</span>
               </div>
-              <Link href="/auth/signin" className="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-medium hover:shadow-lg transition-all">
+              <Link href="/auth/signin" className="px-4 py-2 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-lg font-medium hover:shadow-lg transition-all">
                 Sign In
               </Link>
             </div>
@@ -898,7 +898,7 @@ export default function VisualizerPage() {
                     <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Sorting</h3>
                     <div className="space-y-1 mb-6">
                       {(["bubble", "selection", "insertion", "merge", "quick", "heap"] as AlgorithmType[]).map(algo => (
-                        <button key={algo} onClick={() => { setAlgorithm(algo); reset(); }} className={cn("w-full px-3 py-2 rounded-lg text-left text-sm font-medium transition-all", algorithm === algo ? "bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 border border-blue-200" : "text-gray-600 hover:text-gray-800 hover:bg-gray-100")}>
+                        <button key={algo} onClick={() => { setAlgorithm(algo); reset(); }} className={cn("w-full px-3 py-2 rounded-lg text-left text-sm font-medium transition-all", algorithm === algo ? "bg-gradient-to-r from-sky-100 to-cyan-100 text-sky-700 border border-sky-200" : "text-gray-600 hover:text-gray-800 hover:bg-gray-100")}>
                           {algorithmData[algo].name}
                         </button>
                       ))}
@@ -906,7 +906,7 @@ export default function VisualizerPage() {
                     <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Searching</h3>
                     <div className="space-y-1">
                       {(["linear", "binary"] as AlgorithmType[]).map(algo => (
-                        <button key={algo} onClick={() => { setAlgorithm(algo); reset(); }} className={cn("w-full px-3 py-2 rounded-lg text-left text-sm font-medium transition-all", algorithm === algo ? "bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-700 border border-blue-200" : "text-gray-600 hover:text-gray-800 hover:bg-gray-100")}>
+                        <button key={algo} onClick={() => { setAlgorithm(algo); reset(); }} className={cn("w-full px-3 py-2 rounded-lg text-left text-sm font-medium transition-all", algorithm === algo ? "bg-gradient-to-r from-sky-100 to-cyan-100 text-sky-700 border border-sky-200" : "text-gray-600 hover:text-gray-800 hover:bg-gray-100")}>
                           {algorithmData[algo].name}
                         </button>
                       ))}
@@ -928,14 +928,14 @@ export default function VisualizerPage() {
                       <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="space-y-3">
                         <div className="flex gap-2">
                           <input type="text" value={customArrayInput} onChange={(e) => setCustomArrayInput(e.target.value)} placeholder="Enter values (e.g., 64, 34, 25, 12)" className="flex-1 px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                          <button onClick={applyCustomArray} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-medium text-sm flex items-center gap-2 shadow-md">
+                          <button onClick={applyCustomArray} className="px-4 py-2 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-xl font-medium text-sm flex items-center gap-2 shadow-md">
                             <Check className="w-4 h-4" />Apply
                           </button>
                         </div>
                         {(algorithm === "linear" || algorithm === "binary") && (
                           <div className="flex gap-2">
                             <input type="number" value={customSearchTarget} onChange={(e) => setCustomSearchTarget(e.target.value)} placeholder="Search target (1-100)" className="flex-1 px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                            <button onClick={applySearchTarget} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-medium text-sm flex items-center gap-2 shadow-md">
+                            <button onClick={applySearchTarget} className="px-4 py-2 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-xl font-medium text-sm flex items-center gap-2 shadow-md">
                               <Search className="w-4 h-4" />Set Target
                             </button>
                           </div>
@@ -992,7 +992,7 @@ export default function VisualizerPage() {
                         <button onClick={stepBackward} className="p-3 bg-gray-100 hover:bg-gray-200 rounded-xl text-gray-600 hover:text-gray-800 transition-colors" disabled={isRunning}>
                           <SkipBack className="w-5 h-5" />
                         </button>
-                        <button onClick={runAlgorithm} className={cn("p-4 rounded-xl text-white shadow-lg transition-all", isRunning && !isPaused ? "bg-gradient-to-r from-amber-500 to-orange-500" : "bg-gradient-to-r from-blue-500 to-cyan-500 hover:shadow-blue-500/25")}>
+                        <button onClick={runAlgorithm} className={cn("p-4 rounded-xl text-white shadow-lg transition-all", isRunning && !isPaused ? "bg-gradient-to-r from-amber-500 to-orange-500" : "bg-gradient-to-r from-sky-400 to-cyan-400 hover:shadow-sky-400/25")}>
                           {isRunning && !isPaused ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
                         </button>
                         <button onClick={stepForward} className="p-3 bg-gray-100 hover:bg-gray-200 rounded-xl text-gray-600 hover:text-gray-800 transition-colors" disabled={isRunning}>
@@ -1015,7 +1015,7 @@ export default function VisualizerPage() {
                         </div>
                       </div>
                       <div className="flex items-center gap-4 text-xs flex-wrap">
-                        <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-gradient-to-r from-blue-400 to-cyan-500" /><span className="text-gray-500">Default</span></div>
+                        <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-gradient-to-r from-sky-400 to-cyan-400" /><span className="text-gray-500">Default</span></div>
                         <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-gradient-to-r from-yellow-400 to-amber-500" /><span className="text-gray-500">Comparing</span></div>
                         <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-gradient-to-r from-red-400 to-rose-500" /><span className="text-gray-500">Swapping</span></div>
                         <div className="flex items-center gap-2"><div className="w-3 h-3 rounded bg-gradient-to-r from-emerald-400 to-green-500" /><span className="text-gray-500">Sorted</span></div>
@@ -1029,7 +1029,7 @@ export default function VisualizerPage() {
                     {showInfo && (
                       <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
                         <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-md">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-400 flex items-center justify-center shadow-md">
                             <Lightbulb className="w-5 h-5 text-white" />
                           </div>
                           <div>
@@ -1092,7 +1092,7 @@ export default function VisualizerPage() {
               <motion.div key="datastructures" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
                 <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
                   {([
-                    { id: "stack" as const, name: "Stack", icon: Layers, color: "from-blue-500 to-teal-500" },
+                    { id: "stack" as const, name: "Stack", icon: Layers, color: "from-emerald-400 to-teal-400" },
                     { id: "queue" as const, name: "Queue", icon: ArrowRight, color: "from-emerald-500 to-teal-500" },
                     { id: "linkedlist" as const, name: "Singly Linked List", icon: GitBranch, color: "from-orange-500 to-red-500" },
                     { id: "doublylinkedlist" as const, name: "Doubly Linked List", icon: ArrowLeftRight, color: "from-pink-500 to-rose-500" },
@@ -1114,7 +1114,7 @@ export default function VisualizerPage() {
                           <div className="flex flex-col-reverse gap-2 min-h-[300px] justify-end">
                             <AnimatePresence>
                               {stack.map((item, index) => (
-                                <motion.div key={item.id} initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className={cn("w-32 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg", index === stack.length - 1 ? "bg-gradient-to-r from-blue-500 to-teal-500" : "bg-gradient-to-r from-gray-400 to-gray-500")}>
+                                <motion.div key={item.id} initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 50 }} className={cn("w-32 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg", index === stack.length - 1 ? "bg-gradient-to-r from-emerald-400 to-teal-400" : "bg-gradient-to-r from-gray-400 to-gray-500")}>
                                   {item.value}
                                   {index === stack.length - 1 && <span className="ml-2 text-xs font-normal opacity-75">TOP</span>}
                                 </motion.div>
@@ -1134,7 +1134,7 @@ export default function VisualizerPage() {
                           <div className="flex gap-2 min-w-[300px] justify-center flex-wrap">
                             <AnimatePresence>
                               {queue.map((item, index) => (
-                                <motion.div key={item.id} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} className={cn("w-16 h-16 rounded-xl flex flex-col items-center justify-center text-white font-bold text-lg shadow-lg", index === 0 ? "bg-gradient-to-br from-emerald-500 to-teal-500" : index === queue.length - 1 ? "bg-gradient-to-br from-blue-500 to-cyan-500" : "bg-gradient-to-br from-gray-400 to-gray-500")}>
+                                <motion.div key={item.id} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }} className={cn("w-16 h-16 rounded-xl flex flex-col items-center justify-center text-white font-bold text-lg shadow-lg", index === 0 ? "bg-gradient-to-br from-emerald-500 to-teal-500" : index === queue.length - 1 ? "bg-gradient-to-br from-sky-400 to-cyan-400" : "bg-gradient-to-br from-gray-400 to-gray-500")}>
                                   {item.value}
                                   <span className="text-[10px] font-normal opacity-75">{index === 0 ? "FRONT" : index === queue.length - 1 ? "REAR" : ""}</span>
                                 </motion.div>
@@ -1273,7 +1273,7 @@ export default function VisualizerPage() {
                       
                       {dsType === "stack" && (
                         <div className="grid grid-cols-2 gap-2">
-                          <button onClick={pushStack} className="px-4 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
+                          <button onClick={pushStack} className="px-4 py-3 bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
                             <Plus className="w-4 h-4" />Push
                           </button>
                           <button onClick={popStack} className="px-4 py-3 bg-gradient-to-r from-red-500 to-rose-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
@@ -1303,7 +1303,7 @@ export default function VisualizerPage() {
                               <Trash2 className="w-4 h-4" />Delete Head
                             </button>
                           </div>
-                          <button onClick={insertAtIndex} className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
+                          <button onClick={insertAtIndex} className="w-full px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
                             <MapPin className="w-4 h-4" />Insert at Index
                           </button>
                         </div>
@@ -1319,7 +1319,7 @@ export default function VisualizerPage() {
                               <ArrowRight className="w-4 h-4" />At Tail
                             </button>
                           </div>
-                          <button onClick={insertDoublyAtIndex} className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
+                          <button onClick={insertDoublyAtIndex} className="w-full px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md">
                             <MapPin className="w-4 h-4" />Insert at Index
                           </button>
                           <div className="grid grid-cols-2 gap-2">
@@ -1355,7 +1355,7 @@ export default function VisualizerPage() {
                             <button onClick={addGraphNode} disabled={isTraversing} className="px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md disabled:opacity-50">
                               <Plus className="w-4 h-4" />Add Node
                             </button>
-                            <button onClick={addGraphEdge} disabled={isTraversing} className="px-4 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md disabled:opacity-50">
+                            <button onClick={addGraphEdge} disabled={isTraversing} className="px-4 py-3 bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md disabled:opacity-50">
                               <GitBranch className="w-4 h-4" />Add Edge
                             </button>
                           </div>
@@ -1363,7 +1363,7 @@ export default function VisualizerPage() {
                             <button onClick={runBFS} disabled={isTraversing} className="px-4 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md disabled:opacity-50">
                               <Layers className="w-4 h-4" />Run BFS
                             </button>
-                            <button onClick={runDFS} disabled={isTraversing} className="px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md disabled:opacity-50">
+                            <button onClick={runDFS} disabled={isTraversing} className="px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-400 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-md disabled:opacity-50">
                               <TreeDeciduous className="w-4 h-4" />Run DFS
                             </button>
                           </div>

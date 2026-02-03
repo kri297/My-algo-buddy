@@ -165,7 +165,7 @@ export default function ChallengesPage() {
           </div>
           <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-blue-500 to-teal-500 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-500"
               style={{ width: `${(completedCount / challenges.length) * 100}%` }}
             />
           </div>
