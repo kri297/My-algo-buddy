@@ -165,26 +165,13 @@ export default function LearnPage() {
   };
 
   const isLessonUnlocked = (moduleIndex: number, lessonIndex: number) => {
-    // First module is always unlocked
-    if (moduleIndex === 0) return true;
-    
-    // If not logged in, only first module is accessible
-    if (!session) return moduleIndex === 0;
+    // If not logged in, only first lesson of first module is accessible
+    if (!session) return moduleIndex === 0 && lessonIndex === 0;
 
-    // For subsequent modules: check if ALL lessons of previous module are completed
-    if (moduleIndex > 0) {
-      const prevModule = courseStructure[moduleIndex - 1];
-      const prevModuleCompleted = prevModule.lessons.every(lesson => 
-        completedLessons.has(lesson.slug)
-      );
-      
-      // If previous module not completed, this module is locked
-      if (!prevModuleCompleted) return false;
-    }
-
-    // Within current module: first lesson always unlocked, others need previous lesson completed
+    // First lesson of EVERY module is always unlocked for logged-in users
     if (lessonIndex === 0) return true;
     
+    // For subsequent lessons within a module: need previous lesson completed
     const prevLessonSlug = courseStructure[moduleIndex].lessons[lessonIndex - 1].slug;
     return completedLessons.has(prevLessonSlug);
   };
@@ -319,7 +306,8 @@ export default function LearnPage() {
             const progress = getModuleProgress(module);
             const isExpanded = expandedModules.has(module.id);
             const isModuleCompleted = progress.completed === progress.total;
-            const isModuleLocked = moduleIndex > 0 && !isLessonUnlocked(moduleIndex, 0);
+            // All modules accessible now - first lesson of each module is unlocked
+            const isModuleLocked = false;
 
             return (
               <motion.div
