@@ -439,7 +439,11 @@ export default function VisualizerPage() {
       if (step.comparing) { setComparisons(p => p + 1); if (soundEnabled) playSound(200 + step.array[step.comparing[0]].value * 5); }
       if (step.swapping) { setSwaps(p => p + 1); if (soundEnabled) playSound(600, 30); }
       stepIndexRef.current++;
-      animationRef.current = setTimeout(animate, Math.max(10, 500 - speed * 4));
+      // Better speed mapping: 1% = 1000ms (slow), 50% = 100ms (medium), 100% = 10ms (fast)
+      const delay = speed <= 50 
+        ? 1000 - (speed * 18)  // 1% = 982ms, 50% = 100ms
+        : 100 - ((speed - 50) * 1.8);  // 51% = 98ms, 100% = 10ms
+      animationRef.current = setTimeout(animate, Math.max(10, delay));
     };
     animate();
   };
