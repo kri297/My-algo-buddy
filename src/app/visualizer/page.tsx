@@ -17,7 +17,7 @@ type DataStructureType = "stack" | "queue" | "linkedlist" | "doublylinkedlist" |
 type ViewMode = "algorithms" | "datastructures";
 type CodeLanguage = "javascript" | "python" | "java" | "cpp";
 
-interface ArrayBar { value: number; displayValue?: number; state: "default" | "comparing" | "swapping" | "sorted" | "pivot" | "searching" | "found" | "min"; id: string; }
+interface ArrayBar { value: number; state: "default" | "comparing" | "swapping" | "sorted" | "pivot" | "searching" | "found" | "min"; id: string; }
 interface AlgorithmInfo { name: string; description: string; timeComplexity: { best: string; average: string; worst: string }; spaceComplexity: string; stable: boolean; steps: string[]; }
 interface StackItem { value: number; id: string; }
 interface QueueItem { value: number; id: string; }
@@ -159,28 +159,12 @@ export default function VisualizerPage() {
     if (values.length > 30) { showToast("Maximum 30 elements allowed"); return; }
     stopAnimation();
     
-    // Normalize values for visualization while keeping original values for display
-    const minVal = Math.min(...values);
-    const maxVal = Math.max(...values);
-    const range = maxVal - minVal;
-    
-    const newArray: ArrayBar[] = values.map(originalValue => {
-      let visualValue: number;
-      if (range === 0) {
-        // All values are the same
-        visualValue = 50;
-      } else {
-        // Scale values to 15-100 range for better visualization
-        visualValue = Math.round(15 + ((originalValue - minVal) / range) * 85);
-      }
-      
-      return { 
-        value: visualValue,        // Used for bar height
-        displayValue: originalValue, // Used for showing the actual number
-        state: "default" as const, 
-        id: generateId() 
-      };
-    });
+    // Use original values directly - no normalization
+    const newArray: ArrayBar[] = values.map(originalValue => ({ 
+      value: originalValue,
+      state: "default" as const, 
+      id: generateId() 
+    }));
     
     setArray(newArray);
     setArraySize(values.length);
@@ -295,9 +279,7 @@ export default function VisualizerPage() {
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j + 1 ? "comparing" as const : idx >= n - i ? "sorted" as const : "default" as const })), comparing: [j, j + 1] });
-        const val1 = tempArr[j].displayValue ?? tempArr[j].value;
-        const val2 = tempArr[j + 1].displayValue ?? tempArr[j + 1].value;
-        if (val1 > val2) {
+        if (tempArr[j].value > tempArr[j + 1].value) {
           [tempArr[j], tempArr[j + 1]] = [tempArr[j + 1], tempArr[j]];
           steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j + 1 ? "swapping" as const : idx >= n - i ? "sorted" as const : "default" as const })), swapping: [j, j + 1] });
         }
@@ -315,9 +297,7 @@ export default function VisualizerPage() {
       let minIdx = i;
       for (let j = i + 1; j < n; j++) {
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx < i ? "sorted" as const : idx === minIdx ? "min" as const : idx === j ? "comparing" as const : "default" as const })), comparing: [minIdx, j] });
-        const valJ = tempArr[j].displayValue ?? tempArr[j].value;
-        const valMin = tempArr[minIdx].displayValue ?? tempArr[minIdx].value;
-        if (valJ < valMin) minIdx = j;
+        if (tempArr[j].value < tempArr[minIdx].value) minIdx = j;
       }
       if (minIdx !== i) { [tempArr[i], tempArr[minIdx]] = [tempArr[minIdx], tempArr[i]]; steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx <= i ? "sorted" as const : "default" as const })), swapping: [i, minIdx] }); }
     }
@@ -330,10 +310,7 @@ export default function VisualizerPage() {
     const tempArr = arr.map(item => ({ ...item }));
     for (let i = 1; i < tempArr.length; i++) {
       let j = i;
-      while (j > 0) {
-        const val1 = tempArr[j - 1].displayValue ?? tempArr[j - 1].value;
-        const val2 = tempArr[j].displayValue ?? tempArr[j].value;
-        if (val1 <= val2) break;
+      while (j > 0 && tempArr[j - 1].value > tempArr[j].value) {
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j - 1 ? "comparing" as const : "default" as const })), comparing: [j - 1, j] });
         [tempArr[j], tempArr[j - 1]] = [tempArr[j - 1], tempArr[j]];
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j - 1 ? "swapping" as const : "default" as const })), swapping: [j - 1, j] });
@@ -350,13 +327,12 @@ export default function VisualizerPage() {
     const sortedIndices = new Set<number>();
     const qs = (low: number, high: number) => {
       if (low < high) {
-        const pivot = tempArr[high].displayValue ?? tempArr[high].value;
+        const pivot = tempArr[high].value;
         let i = low - 1;
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === high ? "pivot" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })) });
         for (let j = low; j < high; j++) {
           steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === high ? "pivot" as const : idx === j ? "comparing" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })), comparing: [j, high] });
-          const valJ = tempArr[j].displayValue ?? tempArr[j].value;
-          if (valJ < pivot) { i++; if (i !== j) { [tempArr[i], tempArr[j]] = [tempArr[j], tempArr[i]]; steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i || idx === j ? "swapping" as const : idx === high ? "pivot" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })), swapping: [i, j] }); } }
+          if (tempArr[j].value < pivot) { i++; if (i !== j) { [tempArr[i], tempArr[j]] = [tempArr[j], tempArr[i]]; steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i || idx === j ? "swapping" as const : idx === high ? "pivot" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })), swapping: [i, j] }); } }
         }
         [tempArr[i + 1], tempArr[high]] = [tempArr[high], tempArr[i + 1]];
         sortedIndices.add(i + 1);
@@ -374,27 +350,21 @@ export default function VisualizerPage() {
     const tempArr = arr.map(item => ({ ...item }));
     for (let i = 0; i < tempArr.length; i++) {
       steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i ? "searching" as const : "default" as const })), comparing: [i] });
-      const compareValue = tempArr[i].displayValue ?? tempArr[i].value;
-      if (compareValue === target) { steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i ? "found" as const : "default" as const })) }); return steps; }
+      if (tempArr[i].value === target) { steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i ? "found" as const : "default" as const })) }); return steps; }
     }
     return steps;
   };
 
   const generateBinarySearchSteps = (arr: ArrayBar[], target: number) => {
     const steps: { array: ArrayBar[]; comparing?: number[] }[] = [];
-    const tempArr = [...arr].sort((a, b) => {
-      const aVal = a.displayValue ?? a.value;
-      const bVal = b.displayValue ?? b.value;
-      return aVal - bVal;
-    }).map(item => ({ ...item, state: "default" as const }));
+    const tempArr = [...arr].sort((a, b) => a.value - b.value).map(item => ({ ...item, state: "default" as const }));
     steps.push({ array: tempArr.map(item => ({ ...item, state: "sorted" as const })) });
     let left = 0, right = tempArr.length - 1;
     while (left <= right) {
       const mid = Math.floor((left + right) / 2);
       steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === mid ? "searching" as const : idx >= left && idx <= right ? "comparing" as const : "default" as const })), comparing: [mid] });
-      const compareValue = tempArr[mid].displayValue ?? tempArr[mid].value;
-      if (compareValue === target) { steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === mid ? "found" as const : "default" as const })) }); return steps; }
-      else if (compareValue < target) left = mid + 1;
+      if (tempArr[mid].value === target) { steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === mid ? "found" as const : "default" as const })) }); return steps; }
+      else if (tempArr[mid].value < target) left = mid + 1;
       else right = mid - 1;
     }
     return steps;
@@ -1012,7 +982,7 @@ export default function VisualizerPage() {
                         {array.map((bar) => (
                           <motion.div key={bar.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="relative flex flex-col items-center" style={{ width: `${Math.max(20, 100 / array.length - 1)}%` }}>
                             <motion.div className={cn("w-full rounded-t-lg bg-gradient-to-t shadow-lg transition-colors duration-200", getBarColor(bar.state))} style={{ height: `${bar.value * 2.5}px` }} animate={{ scale: bar.state === "comparing" || bar.state === "swapping" ? 1.05 : 1 }} />
-                            {array.length <= 20 && <span className="text-xs text-gray-500 mt-1 font-mono">{bar.displayValue ?? bar.value}</span>}
+                            {array.length <= 20 && <span className="text-xs text-gray-500 mt-1 font-mono">{bar.value}</span>}
                           </motion.div>
                         ))}
                       </AnimatePresence>
