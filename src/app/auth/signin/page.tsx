@@ -22,19 +22,22 @@ export default function SignInPage() {
         email: formData.email,
         password: formData.password,
         redirect: false,
-        callbackUrl: '/dashboard',
       });
+
+      console.log('Sign in result:', result);
 
       if (result?.error) {
         setError(result.error);
         setLoading(false);
       } else if (result?.ok) {
-        // Wait a bit for session to be established
-        await new Promise(resolve => setTimeout(resolve, 500));
-        router.push('/dashboard');
-        router.refresh();
+        // Successfully signed in - redirect immediately
+        window.location.href = '/dashboard';
+      } else {
+        setError('Sign in failed. Please try again.');
+        setLoading(false);
       }
     } catch (err: any) {
+      console.error('Sign in error:', err);
       setError(err.message || 'Failed to sign in');
       setLoading(false);
     }
