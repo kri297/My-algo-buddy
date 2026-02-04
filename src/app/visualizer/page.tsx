@@ -295,7 +295,9 @@ export default function VisualizerPage() {
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j + 1 ? "comparing" as const : idx >= n - i ? "sorted" as const : "default" as const })), comparing: [j, j + 1] });
-        if (tempArr[j].value > tempArr[j + 1].value) {
+        const val1 = tempArr[j].displayValue ?? tempArr[j].value;
+        const val2 = tempArr[j + 1].displayValue ?? tempArr[j + 1].value;
+        if (val1 > val2) {
           [tempArr[j], tempArr[j + 1]] = [tempArr[j + 1], tempArr[j]];
           steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j + 1 ? "swapping" as const : idx >= n - i ? "sorted" as const : "default" as const })), swapping: [j, j + 1] });
         }
@@ -313,7 +315,9 @@ export default function VisualizerPage() {
       let minIdx = i;
       for (let j = i + 1; j < n; j++) {
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx < i ? "sorted" as const : idx === minIdx ? "min" as const : idx === j ? "comparing" as const : "default" as const })), comparing: [minIdx, j] });
-        if (tempArr[j].value < tempArr[minIdx].value) minIdx = j;
+        const valJ = tempArr[j].displayValue ?? tempArr[j].value;
+        const valMin = tempArr[minIdx].displayValue ?? tempArr[minIdx].value;
+        if (valJ < valMin) minIdx = j;
       }
       if (minIdx !== i) { [tempArr[i], tempArr[minIdx]] = [tempArr[minIdx], tempArr[i]]; steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx <= i ? "sorted" as const : "default" as const })), swapping: [i, minIdx] }); }
     }
@@ -326,7 +330,10 @@ export default function VisualizerPage() {
     const tempArr = arr.map(item => ({ ...item }));
     for (let i = 1; i < tempArr.length; i++) {
       let j = i;
-      while (j > 0 && tempArr[j - 1].value > tempArr[j].value) {
+      while (j > 0) {
+        const val1 = tempArr[j - 1].displayValue ?? tempArr[j - 1].value;
+        const val2 = tempArr[j].displayValue ?? tempArr[j].value;
+        if (val1 <= val2) break;
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j - 1 ? "comparing" as const : "default" as const })), comparing: [j - 1, j] });
         [tempArr[j], tempArr[j - 1]] = [tempArr[j - 1], tempArr[j]];
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === j || idx === j - 1 ? "swapping" as const : "default" as const })), swapping: [j - 1, j] });
@@ -343,12 +350,13 @@ export default function VisualizerPage() {
     const sortedIndices = new Set<number>();
     const qs = (low: number, high: number) => {
       if (low < high) {
-        const pivot = tempArr[high].value;
+        const pivot = tempArr[high].displayValue ?? tempArr[high].value;
         let i = low - 1;
         steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === high ? "pivot" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })) });
         for (let j = low; j < high; j++) {
           steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === high ? "pivot" as const : idx === j ? "comparing" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })), comparing: [j, high] });
-          if (tempArr[j].value < pivot) { i++; if (i !== j) { [tempArr[i], tempArr[j]] = [tempArr[j], tempArr[i]]; steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i || idx === j ? "swapping" as const : idx === high ? "pivot" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })), swapping: [i, j] }); } }
+          const valJ = tempArr[j].displayValue ?? tempArr[j].value;
+          if (valJ < pivot) { i++; if (i !== j) { [tempArr[i], tempArr[j]] = [tempArr[j], tempArr[i]]; steps.push({ array: tempArr.map((item, idx) => ({ ...item, state: idx === i || idx === j ? "swapping" as const : idx === high ? "pivot" as const : sortedIndices.has(idx) ? "sorted" as const : "default" as const })), swapping: [i, j] }); } }
         }
         [tempArr[i + 1], tempArr[high]] = [tempArr[high], tempArr[i + 1]];
         sortedIndices.add(i + 1);
