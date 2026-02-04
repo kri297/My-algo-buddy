@@ -51,12 +51,11 @@ export default function ProfilePage() {
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth/signin');
+      return;
     }
-  }, [status, router]);
 
-  useEffect(() => {
     const fetchAllData = async () => {
-      if (session?.user?.email) {
+      if (status === 'authenticated' && session?.user?.email) {
         try {
           const [userRes, progressRes, achievementsRes] = await Promise.all([
             fetch(`/api/users?email=${session.user.email}`),
@@ -173,10 +172,10 @@ export default function ProfilePage() {
       }
     };
 
-    if (session) {
+    if (status === 'authenticated') {
       fetchAllData();
     }
-  }, [session]);
+  }, [session?.user?.email, session?.user?.id, status]);
 
   if (status === 'loading' || loading) {
     return (

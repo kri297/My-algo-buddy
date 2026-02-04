@@ -30,12 +30,13 @@ export default function DashboardPage() {
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth/signin');
+      return;
     }
 
-    if (session?.user?.id) {
+    if (status === 'authenticated' && session?.user?.id) {
       fetchDashboardData();
     }
-  }, [session, status]);
+  }, [session?.user?.id, status, router]);
 
   const fetchDashboardData = async () => {
     try {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
 const SYSTEM_PROMPT = `You are AlgoBuddy AI, an expert coding assistant specializing in data structures and algorithms. Your role is to help students learn effectively by:
 
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     if (!GEMINI_API_KEY) {
       console.error('GEMINI_API_KEY is missing');
       return NextResponse.json(
-        { message: 'Sorry, the AI assistant is not configured yet. Please add your Gemini API key to the .env.local file.' },
+        { message: '❌ The AI assistant is not configured.\n\nTo enable it:\n1. Go to https://makersuite.google.com/app/apikey\n2. Create a new API key\n3. Add it to your .env.local file as GEMINI_API_KEY=your_key_here\n4. Restart your development server' },
         { status: 200 }
       );
     }
@@ -105,10 +105,12 @@ export async function POST(request: NextRequest) {
       console.error('Gemini API error:', errorData);
       
       let errorMessage = 'Sorry, I encountered an error.';
-      if (response.status === 404) {
-        errorMessage = 'The Gemini API endpoint was not found. Please verify your API key is correct and has access to the Gemini API.';
+      if (response.status === 400) {
+        errorMessage = '❌ API key is invalid or the request format is incorrect. Please check your Gemini API key.';
+      } else if (response.status === 404) {
+        errorMessage = '❌ The Gemini API endpoint was not found. Your API key might be invalid or expired.\n\nPlease:\n1. Get a new API key from https://makersuite.google.com/app/apikey\n2. Update GEMINI_API_KEY in your .env.local file\n3. Restart the development server';
       } else if (response.status === 403) {
-        errorMessage = 'API key access denied. Please check your Gemini API key permissions.';
+        errorMessage = '❌ API key access denied. Please verify your Gemini API key has proper permissions and is enabled for the Gemini API.';
       } else if (response.status === 429) {
         errorMessage = 'Rate limit exceeded. Please try again in a few moments.';
       } else {
