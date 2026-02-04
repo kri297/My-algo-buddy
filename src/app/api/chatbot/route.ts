@@ -35,7 +35,14 @@ export async function POST(request: NextRequest) {
       console.error('GEMINI_API_KEY is missing');
       return NextResponse.json(
         { message: '❌ The AI assistant is not configured.\n\nTo enable it:\n1. Go to https://makersuite.google.com/app/apikey\n2. Create a new API key\n3. Add it to your .env.local file as GEMINI_API_KEY=your_key_here\n4. Restart your development server' },
-        { status: 200 }
+        { 
+          status: 200,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          },
+        }
       );
     }
 
@@ -135,14 +142,42 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('Successfully got AI response');
-    return NextResponse.json({ message: aiMessage });
+    return NextResponse.json(
+      { message: aiMessage },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }
+    );
   } catch (error: any) {
     console.error('Chatbot API error:', error.message);
     return NextResponse.json(
       { 
         message: "I'm having trouble connecting right now. The AI service might be temporarily unavailable. Please try again in a moment."
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+      }
     );
   }
+}
+
+// Handle OPTIONS for CORS preflight
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
 }
