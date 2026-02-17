@@ -48,7 +48,7 @@ const stats = [
   { value: "13+", label: "Algorithms" },
   { value: "300+", label: "Quiz Questions" },
   { value: "130+", label: "Practice Problems" },
-  { value: "4", label: "Languages" },
+  { value: "5", label: "Languages" },
 ];
 
 export default function AboutPage() {

@@ -17,6 +17,7 @@ export default function SettingsPage() {
   ];
 
   const languages: { value: ProgrammingLanguage; label: string; color: string }[] = [
+    { value: "c", label: "C", color: "from-gray-400 to-gray-600" },
     { value: "python", label: "Python", color: "from-blue-400 to-blue-600" },
     { value: "javascript", label: "JavaScript", color: "from-yellow-400 to-amber-500" },
     { value: "java", label: "Java", color: "from-orange-400 to-red-500" },

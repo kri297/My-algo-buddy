@@ -29,7 +29,7 @@ declare module 'next-auth/jwt' {
 
 // Difficulty & Language Types
 export type DifficultyLevel = "beginner" | "intermediate" | "advanced" | "expert";
-export type Language = "python" | "javascript" | "java" | "cpp";
+export type Language = "c" | "python" | "javascript" | "java" | "cpp";
 export type ProgrammingLanguage = Language; // Alias for compatibility
 
 // Theme Types

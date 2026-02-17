@@ -120,7 +120,7 @@ interface SettingsState {
 
 const defaultSettings: UserSettings = {
   theme: "system",
-  defaultLanguage: "python",
+  defaultLanguage: "c",
   animationSpeed: "normal",
   showCodeHighlighting: true,
   showVariablePanel: true,
@@ -244,7 +244,7 @@ interface CodeEditorState {
 }
 
 export const useCodeEditorStore = create<CodeEditorState>((set) => ({
-  language: "python",
+  language: "c",
   code: "",
   setLanguage: (language) => set({ language }),
   setCode: (code) => set({ code }),

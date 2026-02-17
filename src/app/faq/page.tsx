@@ -90,7 +90,7 @@ const faqData: FAQItem[] = [
   {
     id: "languages",
     question: "What programming languages are supported?",
-    answer: "We support Python, JavaScript, Java, and C++. All algorithm explanations and code examples are available in all four languages. You can switch between languages at any time in the settings or on individual lesson pages.",
+    answer: "We support C, Python, JavaScript, Java, and C++. All algorithm explanations and code examples are available in all five languages. You can switch between languages at any time in the settings or on individual lesson pages.",
     category: "features",
   },
 

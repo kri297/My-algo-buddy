@@ -16,6 +16,7 @@ interface CodeEditorProps {
 }
 
 const languageMap: Record<ProgrammingLanguage, string> = {
+  c: "c",
   python: "python",
   javascript: "javascript",
   java: "java",
@@ -23,6 +24,7 @@ const languageMap: Record<ProgrammingLanguage, string> = {
 };
 
 const languageLabels: Record<ProgrammingLanguage, string> = {
+  c: "C",
   python: "Python",
   javascript: "JavaScript",
   java: "Java",

@@ -68,6 +68,21 @@ export const sortingAlgorithms = {
         if (!swapped) break;
     }
 }`,
+
+      c: `void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        int swapped = 0;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = 1;
+            }
+        }
+        if (!swapped) break;
+    }
+}`,
     },
   },
 
@@ -171,6 +186,33 @@ int partition(vector<int>& arr, int low, int high) {
     }
     
     swap(arr[i + 1], arr[high]);
+    return i + 1;
+}`,
+
+      c: `void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pivotIdx = partition(arr, low, high);
+        quickSort(arr, low, pivotIdx - 1);
+        quickSort(arr, pivotIdx + 1, high);
+    }
+}
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
     return i + 1;
 }`,
     },
@@ -287,6 +329,38 @@ void merge(vector<int>& arr, int left, int mid, int right) {
     while (i < leftArr.size()) arr[k++] = leftArr[i++];
     while (j < rightArr.size()) arr[k++] = rightArr[j++];
 }`,
+
+      c: `void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int L[n1], R[n2];
+    
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+    
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k++] = L[i++];
+        } else {
+            arr[k++] = R[j++];
+        }
+    }
+    
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}`,
     },
   },
 
@@ -340,6 +414,20 @@ void merge(vector<int>& arr, int left, int mid, int right) {
 
       cpp: `void insertionSort(vector<int>& arr) {
     for (int i = 1; i < arr.size(); i++) {
+        int key = arr[i];
+        int j = i - 1;
+        
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        
+        arr[j + 1] = key;
+    }
+}`,
+
+      c: `void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
         int key = arr[i];
         int j = i - 1;
         
@@ -410,6 +498,20 @@ void merge(vector<int>& arr, int left, int mid, int right) {
             }
         }
         swap(arr[i], arr[minIdx]);
+    }
+}`,
+
+      c: `void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        int minIdx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        int temp = arr[i];
+        arr[i] = arr[minIdx];
+        arr[minIdx] = temp;
     }
 }`,
     },
@@ -484,6 +586,20 @@ export const searchingAlgorithms = {
     
     return -1;
 }`,
+
+      c: `int binarySearch(int arr[], int n, int target) {
+    int left = 0, right = n - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        
+        if (arr[mid] == target) return mid;
+        if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    
+    return -1;
+}`,
     },
     recursive: {
       python: `def binary_search_recursive(arr, target, left=0, right=None):
@@ -527,6 +643,18 @@ export const searchingAlgorithms = {
 }`,
 
       cpp: `int binarySearchRecursive(vector<int>& arr, int target, int left, int right) {
+    if (left > right) return -1;
+    
+    int mid = left + (right - left) / 2;
+    
+    if (arr[mid] == target) return mid;
+    if (arr[mid] < target) {
+        return binarySearchRecursive(arr, target, mid + 1, right);
+    }
+    return binarySearchRecursive(arr, target, left, mid - 1);
+}`,
+
+      c: `int binarySearchRecursive(int arr[], int target, int left, int right) {
     if (left > right) return -1;
     
     int mid = left + (right - left) / 2;

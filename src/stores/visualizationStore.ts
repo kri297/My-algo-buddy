@@ -61,7 +61,7 @@ const defaultConfig: VisualizationConfig = {
   showVariables: true,
   showStepDescription: true,
   splitView: "horizontal",
-  codeLanguage: "python",
+  codeLanguage: "c",
   animationSpeed: "medium",
 };
 

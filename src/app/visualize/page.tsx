@@ -51,6 +51,7 @@ const algorithms = [
 ];
 
 const languages: { id: Language; name: string }[] = [
+  { id: "c", name: "C" },
   { id: "python", name: "Python" },
   { id: "javascript", name: "JavaScript" },
   { id: "java", name: "Java" },
@@ -93,7 +94,7 @@ export default function VisualizePage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [speed, setSpeed] = useState<AnimationSpeed>("medium");
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(urlAlgo || "bubbleSort");
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>("python");
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>("c");
   const [highlightedLines, setHighlightedLines] = useState<number[]>([]);
   const [showSettings, setShowSettings] = useState(false);
   const [showCode, setShowCode] = useState(true);

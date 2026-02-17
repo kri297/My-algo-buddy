@@ -29,9 +29,10 @@ import { useProgressSync } from '@/hooks/useProgressSync';
 // ============================================
 // LANGUAGE SUPPORT
 // ============================================
-type CodeLanguage = 'javascript' | 'python' | 'java' | 'cpp';
+type CodeLanguage = 'c' | 'javascript' | 'python' | 'java' | 'cpp';
 
 const languageConfig: Record<CodeLanguage, { label: string; color: string; icon: string }> = {
+  c: { label: 'C', color: 'bg-gray-500', icon: 'C' },
   javascript: { label: 'JavaScript', color: 'bg-yellow-500', icon: 'JS' },
   python: { label: 'Python', color: 'bg-blue-500', icon: 'PY' },
   java: { label: 'Java', color: 'bg-orange-500', icon: 'JV' },
@@ -1805,7 +1806,7 @@ export default function LessonPage() {
   
   const { syncLesson, isLessonCompleted, getCompletedLessons } = useProgressSync();
   
-  const [codeLanguage, setCodeLanguage] = useState<CodeLanguage>('javascript');
+  const [codeLanguage, setCodeLanguage] = useState<CodeLanguage>('c');
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [completedSections, setCompletedSections] = useState<Set<number>>(new Set());
