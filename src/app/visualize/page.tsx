@@ -128,6 +128,7 @@ export default function VisualizePage() {
   const [history, setHistory] = useState<HistoryStep[]>([]);
   const [canStepBack, setCanStepBack] = useState(false);
   const [canStepForward, setCanStepForward] = useState(false);
+  const [isCustomArrayApplied, setIsCustomArrayApplied] = useState(false);
   
   const sortingRef = useRef(false);
   const audioContext = useRef<AudioContext | null>(null);
@@ -139,7 +140,7 @@ export default function VisualizePage() {
 
   // Regenerate array when size changes (only for random mode)
   useEffect(() => {
-    if (!isPlaying && inputMode === "random") {
+    if (!isPlaying && inputMode === "random" && !isCustomArrayApplied) {
       const newArray = generateRandomArray(arraySize, 5, 100).map((value, index) => createArrayElement(value, index));
       setArray(newArray);
       // Reset visualization state
@@ -148,7 +149,11 @@ export default function VisualizePage() {
       setHighlightedLines([]);
       setVariables({});
     }
-  }, [arraySize, isPlaying, inputMode]);
+    // Reset flag after useEffect runs
+    if (isCustomArrayApplied) {
+      setIsCustomArrayApplied(false);
+    }
+  }, [arraySize, isPlaying, inputMode, isCustomArrayApplied]);
 
   // Update algorithm when URL param changes
   useEffect(() => {
@@ -1517,13 +1522,16 @@ export default function VisualizePage() {
       return;
     }
     
+    // Set flag to prevent useEffect from regenerating
+    setIsCustomArrayApplied(true);
+    
     // Reset history first
     setHistory([]);
     setCurrentStep(0);
     setHighlightedLines([]);
     setVariables({});
     
-    // Set size first, then array to avoid race conditions
+    // Create and set the custom array
     const newArray = values.map((value, index) => createArrayElement(value, index));
     setArraySize(values.length);
     setArray(newArray);
