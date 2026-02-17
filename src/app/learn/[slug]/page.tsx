@@ -405,6 +405,48 @@ Knowing the difference is crucial for writing bug-free code!`
         title: 'Mutating Methods',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // Dynamic array in C using realloc
+    int* arr = (int*)malloc(6 * sizeof(int));
+    int arr_data[] = {3, 1, 4, 1, 5, 9};
+    for (int i = 0; i < 6; i++) arr[i] = arr_data[i];
+    int size = 6;
+    int capacity = 10;
+    
+    // Add to end (like push)
+    if (size < capacity) {
+        arr[size++] = 2;  // [3,1,4,1,5,9,2]
+    }
+    
+    // Remove from end (like pop)
+    if (size > 0) {
+        int removed = arr[--size]; // returns 2
+    }
+    
+    // Insert at start - shift elements right
+    if (size < capacity) {
+        for (int i = size; i > 0; i--) {
+            arr[i] = arr[i-1];
+        }
+        arr[0] = 0;
+        size++;
+    }
+    
+    // Remove from start - shift elements left
+    if (size > 0) {
+        int removed = arr[0];
+        for (int i = 0; i < size - 1; i++) {
+            arr[i] = arr[i+1];
+        }
+        size--;
+    }
+    
+    free(arr);
+    return 0;
+}`,
           javascript: `const arr = [3, 1, 4, 1, 5, 9];
 
 // push/pop - add/remove from end
@@ -485,6 +527,59 @@ reverse(arr.begin(), arr.end());`
         title: 'Non-Mutating Methods',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int size = 5;
+    
+    // Map - transform each element (create new array)
+    int* doubled = (int*)malloc(size * sizeof(int));
+    for (int i = 0; i < size; i++) {
+        doubled[i] = arr[i] * 2;
+    }
+    // [2, 4, 6, 8, 10]
+    
+    // Filter - keep matching elements
+    int* evens = (int*)malloc(size * sizeof(int));
+    int evens_count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] % 2 == 0) {
+            evens[evens_count++] = arr[i];
+        }
+    }
+    // [2, 4]
+    
+    // Reduce - accumulate to single value
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    // 15
+    
+    // Slice - extract portion (copy subarray)
+    int* middle = (int*)malloc(3 * sizeof(int));
+    for (int i = 0; i < 3; i++) {
+        middle[i] = arr[i + 1];
+    }
+    // [2, 3, 4]
+    
+    // Find - linear search
+    int found = -1;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] > 3) {
+            found = arr[i];
+            break;
+        }
+    }
+    // found = 4
+    
+    free(doubled);
+    free(evens);
+    free(middle);
+    return 0;
+}`,
           javascript: `const arr = [1, 2, 3, 4, 5];
 
 // map - transform each element
