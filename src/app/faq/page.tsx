@@ -6,6 +6,7 @@ import Link from "next/link";
 import { 
   ChevronDown, 
   Search,
+  MessageSquare,
   BookOpen,
   Code2,
   Settings,
