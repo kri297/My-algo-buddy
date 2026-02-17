@@ -18,20 +18,31 @@ export default function SignInPage() {
     setLoading(true);
 
     try {
+      console.log('Attempting sign in...');
       const result = await signIn('credentials', {
         email: formData.email,
         password: formData.password,
         redirect: false,
       });
 
+      console.log('Sign in result:', result);
+
       if (result?.error) {
+        console.error('Sign in error:', result.error);
         setError(result.error);
+        setLoading(false);
+      } else if (result?.ok) {
+        console.log('Sign in successful, redirecting...');
+        // Use replace to prevent back button issues
+        window.location.replace('/dashboard');
       } else {
-        router.push('/dashboard');
+        console.error('Unexpected result:', result);
+        setError('Sign in failed. Please try again.');
+        setLoading(false);
       }
     } catch (err: any) {
+      console.error('Exception during sign in:', err);
       setError(err.message || 'Failed to sign in');
-    } finally {
       setLoading(false);
     }
   };

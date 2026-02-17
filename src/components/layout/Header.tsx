@@ -34,7 +34,7 @@ const navItems = [
   { href: "/practice", label: "Practice", icon: Code2 },
   { href: "/quiz", label: "Quiz", icon: Brain },
   { href: "/flashcards", label: "Flashcards", icon: Layers },
-  { href: "/speed-coding", label: "Speed Coding", icon: Zap },
+  { href: "#", label: "Notes", icon: BookOpen, external: true, externalUrl: "https://drive.google.com/file/d/1YwWIlETYmGHXiDAzIIE_Xiz0H0EoFurH/view?usp=sharing" },
 ];
 
 export function Header() {
@@ -57,11 +57,11 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
             <Code2 className="w-5 h-5 text-white" />
           </div>
           <span className="font-bold text-xl hidden sm:inline-block">
-            <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 bg-clip-text text-transparent">Algo</span>
+            <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-500 bg-clip-text text-transparent">Algo</span>
             <span className="text-slate-900">Buddy</span>
           </span>
         </Link>
@@ -71,6 +71,24 @@ export function Header() {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
+            const isExternal = (item as any).external;
+            const externalUrl = (item as any).externalUrl;
+            
+            if (isExternal && externalUrl) {
+              return (
+                <a
+                  key={item.href}
+                  href={externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                >
+                  <Icon className="w-4 h-4" />
+                  {item.label}
+                </a>
+              );
+            }
+            
             return (
               <Link
                 key={item.href}
@@ -125,6 +143,25 @@ export function Header() {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
+            const isExternal = (item as any).external;
+            const externalUrl = (item as any).externalUrl;
+            
+            if (isExternal && externalUrl) {
+              return (
+                <a
+                  key={item.href}
+                  href={externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                >
+                  <Icon className="w-5 h-5" />
+                  {item.label}
+                </a>
+              );
+            }
+            
             return (
               <Link
                 key={item.href}
@@ -171,7 +208,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
                 <Code2 className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-xl text-slate-900">AlgoBuddy</span>
