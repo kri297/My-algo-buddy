@@ -140,7 +140,13 @@ export default function VisualizePage() {
   // Regenerate array when size changes (only for random mode)
   useEffect(() => {
     if (!isPlaying && inputMode === "random") {
-      setArray(generateRandomArray(arraySize, 5, 100).map((value, index) => createArrayElement(value, index)));
+      const newArray = generateRandomArray(arraySize, 5, 100).map((value, index) => createArrayElement(value, index));
+      setArray(newArray);
+      // Reset visualization state
+      setHistory([]);
+      setCurrentStep(0);
+      setHighlightedLines([]);
+      setVariables({});
     }
   }, [arraySize, isPlaying, inputMode]);
 
@@ -1511,8 +1517,16 @@ export default function VisualizePage() {
       return;
     }
     
-    setArray(values.map((value, index) => createArrayElement(value, index)));
+    // Reset history first
+    setHistory([]);
+    setCurrentStep(0);
+    setHighlightedLines([]);
+    setVariables({});
+    
+    // Set size first, then array to avoid race conditions
+    const newArray = values.map((value, index) => createArrayElement(value, index));
     setArraySize(values.length);
+    setArray(newArray);
   }, [customInput]);
 
   const resetArray = useCallback(() => {
@@ -2248,7 +2262,7 @@ export default function VisualizePage() {
             <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                  Speed:
+                  Animation Speed:
                 </span>
                 <div className="flex items-center gap-2">
                   {(["slow", "medium", "fast"] as AnimationSpeed[]).map((s) => (
@@ -2264,6 +2278,9 @@ export default function VisualizePage() {
                       )}
                     >
                       {s}
+                      <span className="ml-1 opacity-70 text-[10px]">
+                        ({s === "slow" ? "3s" : s === "medium" ? "2s" : "0.8s"})
+                      </span>
                     </button>
                   ))}
                 </div>

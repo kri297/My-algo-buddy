@@ -108,10 +108,10 @@ export const VISUALIZATION_COLORS = {
 
 // Animation speed presets (in milliseconds)
 export const ANIMATION_SPEEDS = {
-  slow: 2000,
-  normal: 1200,
-  medium: 1200,
-  fast: 500,
+  slow: 3000,
+  normal: 2000,
+  medium: 2000,
+  fast: 800,
   instant: 0,
 } as const;
 
