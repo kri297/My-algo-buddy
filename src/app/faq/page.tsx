@@ -193,18 +193,27 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container px-4 max-w-4xl">
+    <div className="min-h-screen py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-white to-purple-50/30">
+      <div className="container px-4 max-w-5xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-6">
+            <HelpCircle className="w-4 h-4" />
+            Help Center
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 text-slate-900 dark:text-white">
+            Frequently Asked{" "}
+            <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+              Questions
+            </span>
+          </h1>
+          <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
             Find answers to common questions about AlgoBuddy. Can&apos;t find what you&apos;re looking for?{" "}
-            <Link href="/contact" className="text-primary hover:underline">
+            <Link href="/contact" className="text-violet-600 dark:text-violet-400 hover:underline font-semibold">
               Contact us
             </Link>
           </p>
@@ -215,16 +224,16 @@ export default function FAQPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8"
+          className="mb-10"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-slate-400" />
             <input
               type="text"
               placeholder="Search questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-12 pr-4 rounded-xl border bg-card focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full h-16 pl-16 pr-6 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-lg focus:outline-none focus:ring-4 focus:ring-violet-500/20 focus:border-violet-500 transition-all shadow-lg hover:shadow-xl"
             />
           </div>
         </motion.div>
@@ -234,9 +243,9 @@ export default function FAQPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mb-8 overflow-x-auto"
+          className="mb-12 overflow-x-auto"
         >
-          <div className="flex gap-2 pb-2">
+          <div className="flex gap-3 pb-3">
             {faqCategories.map((category) => {
               const Icon = category.icon;
               return (
@@ -244,13 +253,13 @@ export default function FAQPage() {
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
                   className={cn(
-                    "flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-colors",
+                    "flex items-center gap-2 px-6 py-3 rounded-xl whitespace-nowrap transition-all duration-300 font-semibold border-2",
                     activeCategory === category.id
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted hover:bg-muted/80"
+                      ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white border-violet-600 shadow-lg scale-105"
+                      : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-violet-300 dark:hover:border-violet-600 hover:scale-105 hover:shadow-md"
                   )}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-5 h-5" />
                   {category.label}
                 </button>
               );
@@ -266,10 +275,10 @@ export default function FAQPage() {
           className="space-y-4"
         >
           {filteredFAQs.length === 0 ? (
-            <div className="text-center py-12 bg-card border rounded-xl">
-              <HelpCircle className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-lg font-semibold mb-2">No results found</h3>
-              <p className="text-muted-foreground mb-4">
+            <div className="text-center py-20 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-lg">
+              <HelpCircle className="w-16 h-16 mx-auto mb-6 text-slate-400 dark:text-slate-600" />
+              <h3 className="text-2xl font-bold mb-3 text-slate-900 dark:text-white">No results found</h3>
+              <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-md mx-auto">
                 Try a different search term or browse all categories
               </p>
               <Button
@@ -278,6 +287,7 @@ export default function FAQPage() {
                   setSearchQuery("");
                   setActiveCategory("all");
                 }}
+                className="px-8 py-4 rounded-xl font-semibold"
               >
                 Clear filters
               </Button>
@@ -286,17 +296,19 @@ export default function FAQPage() {
             filteredFAQs.map((faq) => (
               <div
                 key={faq.id}
-                className="bg-card border rounded-xl overflow-hidden"
+                className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:border-violet-300 dark:hover:border-violet-600"
               >
                 <button
                   onClick={() => toggleItem(faq.id)}
-                  className="w-full flex items-center justify-between p-5 text-left hover:bg-muted/50 transition-colors"
+                  className="w-full flex items-center justify-between p-6 lg:p-7 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
                 >
-                  <span className="font-medium pr-4">{faq.question}</span>
+                  <span className="font-bold text-lg pr-6 text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                    {faq.question}
+                  </span>
                   <ChevronDown
                     className={cn(
-                      "w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform",
-                      expandedItems.has(faq.id) && "rotate-180"
+                      "w-6 h-6 text-slate-400 flex-shrink-0 transition-all duration-300 group-hover:text-violet-600",
+                      expandedItems.has(faq.id) && "rotate-180 text-violet-600"
                     )}
                   />
                 </button>
@@ -306,9 +318,9 @@ export default function FAQPage() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <div className="px-5 pb-5 text-muted-foreground">
+                      <div className="px-6 lg:px-7 pb-6 lg:pb-7 text-slate-600 dark:text-slate-400 leading-relaxed text-base">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -324,18 +336,26 @@ export default function FAQPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 bg-gradient-to-br from-primary/10 to-blue-500/10 border border-primary/20 rounded-2xl p-8 text-center"
+          className="mt-16 relative overflow-hidden"
         >
-          <h2 className="text-2xl font-bold mb-2">Still have questions?</h2>
-          <p className="text-muted-foreground mb-6">
-            Can&apos;t find the answer you&apos;re looking for? Our team is here to help.
-          </p>
-          <Link href="/contact">
-            <Button className="gap-2">
-              Contact Support
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 rounded-3xl"></div>
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+          <div className="relative rounded-3xl p-10 lg:p-14 text-center shadow-2xl">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-bold mb-6">
+              <MessageSquare className="w-4 h-4" />
+              Need More Help?
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-extrabold mb-4 text-white">Still have questions?</h2>
+            <p className="text-xl text-white/95 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Can&apos;t find the answer you&apos;re looking for? Our team is here to help you succeed.
+            </p>
+            <Link href="/contact">
+              <Button className="gap-3 px-10 py-6 bg-white text-violet-600 hover:bg-slate-50 rounded-2xl font-bold text-lg shadow-2xl hover:scale-105 transition-all duration-300">
+                Contact Support
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>

@@ -40,6 +40,7 @@ const languageConfig: Record<CodeLanguage, { label: string; color: string; icon:
 };
 
 interface MultiLangCode {
+  c: string;
   javascript: string;
   python: string;
   java: string;
@@ -107,6 +108,27 @@ Arrays are powerful because they provide:
         title: 'Creating Arrays',
         language: 'multi',
         content: {
+          c: `// Creating arrays in C
+#include <stdio.h>
+
+int main() {
+    // Static array declaration
+    int numbers[] = {1, 2, 3, 4, 5};
+    char fruits[][10] = {"apple", "banana", "orange"};
+    
+    // Create array with size
+    int zeros[5] = {0}; // All elements initialized to 0
+    
+    // Access by index (0-based)
+    printf("%d\\n", numbers[0]); // 1
+    printf("%d\\n", numbers[2]); // 3
+    
+    // Get length
+    int length = sizeof(numbers) / sizeof(numbers[0]);
+    printf("%d\\n", length); // 5
+    
+    return 0;
+}`,
           javascript: `// Creating arrays in JavaScript
 const numbers = [1, 2, 3, 4, 5];
 const fruits = ['apple', 'banana', 'orange'];
@@ -191,6 +213,40 @@ This is why **accessing by index is O(1)** - no searching needed!`
         title: 'Common Operations',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int arr[10] = {10, 20, 30, 40, 50};
+    int size = 5;
+    int capacity = 10;
+    
+    // TRAVERSAL - O(n)
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\\n");
+    
+    // ADD to end (if space available) - O(1)
+    if (size < capacity) {
+        arr[size++] = 60;
+    }
+    
+    // SEARCH - O(n)
+    int target = 30;
+    int idx = -1;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            idx = i;
+            break;
+        }
+    }
+    
+    // UPDATE - O(1)
+    arr[2] = 35;
+    
+    return 0;
+}`,
           javascript: `const arr = [10, 20, 30, 40, 50];
 
 // TRAVERSAL - O(n)
@@ -722,6 +778,60 @@ Think of a stack of plates:
         title: 'Stack Implementation',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_SIZE 100
+
+typedef struct {
+    int items[MAX_SIZE];
+    int top;
+} Stack;
+
+void initStack(Stack* s) {
+    s->top = -1;
+}
+
+void push(Stack* s, int x) {
+    if (s->top < MAX_SIZE - 1) {
+        s->items[++(s->top)] = x;
+    }
+}
+
+int pop(Stack* s) {
+    if (s->top >= 0) {
+        return s->items[(s->top)--];
+    }
+    return -1;  // Error value
+}
+
+int peek(Stack* s) {
+    if (s->top >= 0) {
+        return s->items[s->top];
+    }
+    return -1;
+}
+
+bool isEmpty(Stack* s) {
+    return s->top == -1;
+}
+
+int main() {
+    Stack stack;
+    initStack(&stack);
+    
+    push(&stack, 1);
+    push(&stack, 2);
+    push(&stack, 3);
+    // stack = {1, 2, 3} (3 is top)
+    
+    int top = pop(&stack);      // returns 3
+    int peekVal = peek(&stack); // 2
+    bool empty = isEmpty(&stack); // false
+    
+    return 0;
+}`,
           javascript: `// Using array as stack
 const stack = [];
 
@@ -809,6 +919,41 @@ bool empty = st.empty();`
         title: 'Valid Parentheses',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+#define MAX_SIZE 1000
+
+bool isValid(char* s) {
+    char stack[MAX_SIZE];
+    int top = -1;
+    
+    for (int i = 0; s[i] != '\\0'; i++) {
+        char c = s[i];
+        
+        if (c == '(' || c == '[' || c == '{') {
+            stack[++top] = c;
+        } else {
+            if (top == -1) return false;
+            
+            char last = stack[top--];
+            if ((c == ')' && last != '(') ||
+                (c == ']' && last != '[') ||
+                (c == '}' && last != '{')) {
+                return false;
+            }
+        }
+    }
+    
+    return top == -1;
+}
+
+int main() {
+    printf("%d\\n", isValid("({[]})")); // 1 (true)
+    printf("%d\\n", isValid("([)]"));   // 0 (false)
+    return 0;
+}`,
           javascript: `function isValid(s) {
   const stack = [];
   const pairs = { ')': '(', ']': '[', '}': '{' };
@@ -938,6 +1083,65 @@ Think of a line at a coffee shop:
         title: 'Queue Implementation',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_SIZE 100
+
+typedef struct {
+    int items[MAX_SIZE];
+    int front;
+    int rear;
+    int size;
+} Queue;
+
+void initQueue(Queue* q) {
+    q->front = 0;
+    q->rear = -1;
+    q->size = 0;
+}
+
+void enqueue(Queue* q, int x) {
+    if (q->size < MAX_SIZE) {
+        q->rear = (q->rear + 1) % MAX_SIZE;
+        q->items[q->rear] = x;
+        q->size++;
+    }
+}
+
+int dequeue(Queue* q) {
+    if (q->size > 0) {
+        int item = q->items[q->front];
+        q->front = (q->front + 1) % MAX_SIZE;
+        q->size--;
+        return item;
+    }
+    return -1;  // Error value
+}
+
+int peek(Queue* q) {
+    if (q->size > 0) {
+        return q->items[q->front];
+    }
+    return -1;
+}
+
+bool isEmpty(Queue* q) {
+    return q->size == 0;
+}
+
+int main() {
+    Queue queue;
+    initQueue(&queue);
+    
+    enqueue(&queue, 1);
+    enqueue(&queue, 2);
+    int first = dequeue(&queue);  //  returns 1
+    int front = peek(&queue);     // 2
+    
+    return 0;
+}`,
           javascript: `// Using array as queue (simple but O(n) dequeue)
 const queue = [];
 queue.push(1);    // enqueue
@@ -1069,6 +1273,77 @@ Unlike arrays:
         title: 'Node & List Implementation',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct ListNode {
+    int val;
+    struct ListNode* next;
+} ListNode;
+
+typedef struct {
+    ListNode* head;
+} LinkedList;
+
+ListNode* createNode(int val) {
+    ListNode* node = (ListNode*)malloc(sizeof(ListNode));
+    node->val = val;
+    node->next = NULL;
+    return node;
+}
+
+// Add to front - O(1)
+void prepend(LinkedList* list, int val) {
+    ListNode* node = createNode(val);
+    node->next = list-> head;
+    list->head = node;
+}
+
+// Add to end - O(n)
+void append(LinkedList* list, int val) {
+    ListNode* node = createNode(val);
+    if (!list->head) {
+        list->head = node;
+        return;
+    }
+    ListNode* curr = list->head;
+    while (curr->next) {
+        curr = curr->next;
+    }
+    curr->next = node;
+}
+
+// Remove first occurrence
+void removeValue(LinkedList* list, int val) {
+    if (!list->head) return;
+    
+    if (list->head->val == val) {
+        ListNode* temp = list->head;
+        list->head = list->head->next;
+        free(temp);
+        return;
+    }
+    
+    ListNode* curr = list->head;
+    while (curr->next && curr->next->val != val) {
+        curr = curr->next;
+    }
+    
+    if (curr->next) {
+        ListNode* temp = curr->next;
+        curr->next = curr->next->next;
+        free(temp);
+    }
+}
+
+int main() {
+    LinkedList list = {NULL};
+    append(&list, 1);
+    append(&list, 2);
+    prepend(&list, 0);
+    removeValue(&list, 1);
+    return 0;
+}`,
           javascript: `class ListNode {
   constructor(val) {
     this.val = val;

@@ -25,6 +25,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [stats, setStats] = useState<any>(null);
   const [achievements, setAchievements] = useState<any[]>([]);
+  const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,9 +41,10 @@ export default function DashboardPage() {
 
   const fetchDashboardData = async () => {
     try {
-      const [progressRes, achievementsRes] = await Promise.all([
+      const [progressRes, achievementsRes, userRes] = await Promise.all([
         fetch(`/api/progress?userId=${session?.user?.id}`),
         fetch(`/api/achievements?userId=${session?.user?.id}`),
+        fetch(`/api/users?email=${session?.user?.email}`),
       ]);
 
       if (progressRes.ok) {
@@ -53,6 +55,11 @@ export default function DashboardPage() {
       if (achievementsRes.ok) {
         const achievementsData = await achievementsRes.json();
         setAchievements(achievementsData.achievements || []);
+      }
+
+      if (userRes.ok) {
+        const userData = await userRes.json();
+        setUserData(userData.user);
       }
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error);
@@ -76,8 +83,10 @@ export default function DashboardPage() {
   }
 
   const user = session?.user;
-  const xpToNextLevel = ((user?.level || 1) * 100);
-  const xpProgress = ((user?.xp || 0) % 100);
+  const currentXp = userData?.xp || 0;
+  const currentLevel = userData?.level || 1;
+  const xpToNextLevel = (currentLevel * 100);
+  const xpProgress = (currentXp % 100);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-fuchsia-50">
@@ -108,7 +117,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="absolute -bottom-1 -right-1 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
                   <Zap className="w-3 h-3" />
-                  {user?.level}
+                  {currentLevel}
                 </div>
               </motion.div>
               <div>
@@ -129,7 +138,7 @@ export default function DashboardPage() {
                 >
                   <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium flex items-center gap-1.5 border border-white/30">
                     <TrendingUp className="w-4 h-4" />
-                    Level {user?.level}
+                    Level {currentLevel}
                   </span>
                   <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-medium flex items-center gap-1.5 border border-white/30">
                     <Award className="w-4 h-4" />
@@ -178,23 +187,25 @@ export default function DashboardPage() {
                   Experience Points
                 </h2>
                 <p className="text-sm text-slate-700 mt-1 font-medium">
-                  {xpProgress} / 100 XP to Level {(user?.level || 1) + 1}
+                  {xpProgress} / 100 XP to Level {currentLevel + 1}
                 </p>
               </div>
               <div className="text-right">
                 <div className="text-4xl font-bold text-blue-600">
-                  {user?.xp || 0} XP
+                  {currentXp} XP
                 </div>
                 <p className="text-xs text-slate-600 mt-1 font-medium">Total Points</p>
               </div>
             </div>
-            <div className="relative w-full bg-slate-200 rounded-full h-4 overflow-hidden">
+            <div className="relative w-full bg-slate-200 rounded-full h-4 overflow-hidden shadow-inner">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${xpProgress}%` }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="h-full rounded-full bg-blue-500"
-              />
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-fuchsia-500 shadow-lg"
+              >
+                <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+              </motion.div>
             </div>
           </Card>
         </motion.div>
