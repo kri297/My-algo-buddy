@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+
 
 const SYSTEM_PROMPT = `You are AlgoBuddy AI, an expert coding assistant specializing in data structures and algorithms. Your role is to help students learn effectively by:
 
@@ -35,14 +36,7 @@ export async function POST(request: NextRequest) {
       console.error('GEMINI_API_KEY is missing');
       return NextResponse.json(
         { message: '❌ The AI assistant is not configured.\n\nTo enable it:\n1. Go to https://makersuite.google.com/app/apikey\n2. Create a new API key\n3. Add it to your .env.local file as GEMINI_API_KEY=your_key_here\n4. Restart your development server' },
-        { 
-          status: 200,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type',
-          },
-        }
+        { status: 200 }
       );
     }
 
@@ -142,42 +136,14 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('Successfully got AI response');
-    return NextResponse.json(
-      { message: aiMessage },
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      }
-    );
+    return NextResponse.json({ message: aiMessage });
   } catch (error: any) {
     console.error('Chatbot API error:', error.message);
     return NextResponse.json(
       { 
         message: "I'm having trouble connecting right now. The AI service might be temporarily unavailable. Please try again in a moment."
       },
-      { 
-        status: 500,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      }
+      { status: 500 }
     );
   }
-}
-
-// Handle OPTIONS for CORS preflight
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
 }

@@ -1,9 +1,4 @@
-'use client';
-
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Link from "next/link";
 import {
   ArrowRight,
   Play,
@@ -15,8 +10,6 @@ import {
   Layers,
   Binary,
   TreeDeciduous,
-  LogIn,
-  UserPlus,
 } from "lucide-react";
 
 const features = [
@@ -59,35 +52,15 @@ const features = [
 ];
 
 const dataStructures = [
-  { name: "Arrays", icon: Layers, color: "from-cyan-500 to-blue-500" },
+  { name: "Arrays", icon: Layers, color: "from-blue-500 to-cyan-500" },
   { name: "Linked Lists", icon: GitBranch, color: "from-green-500 to-emerald-500" },
   { name: "Trees", icon: TreeDeciduous, color: "from-amber-500 to-orange-500" },
-  { name: "Graphs", icon: GitBranch, color: "from-cyan-500 to-blue-500" },
+  { name: "Graphs", icon: GitBranch, color: "from-purple-500 to-pink-500" },
   { name: "Stacks & Queues", icon: Layers, color: "from-red-500 to-rose-500" },
-  { name: "Heaps", icon: Binary, color: "from-teal-500 to-cyan-500" },
+  { name: "Heaps", icon: Binary, color: "from-indigo-500 to-violet-500" },
 ];
 
 export default function Home() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/dashboard');
-    }
-  }, [status, router]);
-
-  if (status === 'loading') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-50 via-white to-fuchsia-50">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-600 text-lg">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -107,52 +80,47 @@ export default function Home() {
             </div>
 
             {/* Main heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 text-slate-900 px-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight mb-6 text-slate-900">
               Master{" "}
-              <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Data Structures
               </span>
               <br />
               and{" "}
-              <span className="bg-gradient-to-r from-teal-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 Algorithms
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
+            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
               Watch algorithms execute step-by-step with interactive visualizations.
               Practice with 300+ quiz questions, 130+ LeetCode problems, and AI-powered
               learning assistance. Master DSA with hands-on experience.
             </p>
 
-            {/* Auth Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center mb-6 sm:mb-8 px-4">
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/auth/signup"
-                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+                href="/visualizer"
+                className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                <UserPlus className="w-5 h-5" />
-                Create New Account
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <Play className="w-5 h-5" />
+                Start Visualizing
+                <ArrowRight className="w-5 h-5" />
               </Link>
-              
               <Link
-                href="/auth/signin"
-                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-slate-700 border-2 border-slate-300 rounded-xl font-semibold text-base sm:text-lg hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all duration-200"
+                href="/learn"
+                className="flex items-center gap-2 px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 rounded-xl font-semibold text-lg transition-all duration-200 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
               >
-                <LogIn className="w-5 h-5" />
-                Sign In
+                <BookOpen className="w-5 h-5" />
+                Start Learning
               </Link>
             </div>
-
-            <p className="text-sm text-slate-500">
-              Join thousands of learners mastering DSA
-            </p>
           </div>
 
           {/* Preview mockup */}
           <div className="mt-16 lg:mt-20 relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-sky-200 to-cyan-200 rounded-3xl opacity-20 blur-3xl" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-200 to-purple-200 rounded-3xl opacity-20 blur-3xl" />
             <div className="relative bg-white rounded-2xl shadow-2xl border-2 border-slate-200 overflow-hidden">
               <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-200">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -162,25 +130,25 @@ export default function Home() {
                   Bubble Sort Visualization
                 </span>
               </div>
-              <div className="p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 bg-gradient-to-br from-slate-50 to-blue-50/30">
+              <div className="p-8 flex flex-col lg:flex-row gap-8 bg-gradient-to-br from-slate-50 to-blue-50/30">
                 {/* Visualization area */}
-                <div className="flex-1 flex items-end justify-center gap-1 sm:gap-2 h-32 sm:h-40 lg:h-48">
+                <div className="flex-1 flex items-end justify-center gap-2 h-48">
                   {[64, 34, 25, 12, 22, 11, 90].map((value, i) => (
                     <div
                       key={i}
-                      className={`w-8 sm:w-10 lg:w-12 rounded-t-lg transition-all duration-300 shadow-lg ${
+                      className={`w-12 rounded-t-lg transition-all duration-300 shadow-lg ${
                         i < 2
                           ? "bg-gradient-to-t from-green-500 to-green-400"
                           : i < 4
                           ? "bg-gradient-to-t from-blue-500 to-blue-400"
-                          : "bg-gradient-to-t from-cyan-500 to-blue-400"
+                          : "bg-gradient-to-t from-purple-500 to-purple-400"
                       }`}
                       style={{ height: `${(value / 90) * 100}%` }}
                     />
                   ))}
                 </div>
                 {/* Code panel */}
-                <div className="flex-1 bg-white rounded-xl p-3 sm:p-4 lg:p-5 font-mono text-xs sm:text-sm shadow-xl border-2 border-slate-200 overflow-x-auto">
+                <div className="flex-1 bg-white rounded-xl p-5 font-mono text-sm shadow-xl border-2 border-slate-200">
                   <div className="text-slate-500">{"// Bubble Sort"}</div>
                   <div className="text-purple-600">
                     {"for"}{" "}
@@ -268,7 +236,7 @@ export default function Home() {
                   key={index}
                   className="p-6 rounded-xl bg-slate-50 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center mb-4 shadow-md">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-4 shadow-md">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-slate-900">{feature.title}</h3>
@@ -283,7 +251,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-violet-500 to-fuchsia-500">
+      <section className="py-20 bg-gradient-to-br from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             Ready to Master Algorithms?
@@ -344,7 +312,7 @@ export default function Home() {
               href="/quiz"
               className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border-2 border-slate-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 hover:shadow-md"
             >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center shadow-sm">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-sm">
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <div>

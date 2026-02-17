@@ -52,7 +52,7 @@ const topics: Topic[] = [
     name: "Arrays & Hashing",
     icon: "📊",
     description: "Fundamental array operations and hash table techniques",
-    color: "from-sky-400 to-cyan-400",
+    color: "from-blue-500 to-cyan-500",
     problems: [
       { id: "1", title: "Two Sum", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/two-sum/", leetcodeId: 1, tags: ["Array", "Hash Table"], companies: ["Google", "Amazon", "Meta"], acceptance: "49.1%", completed: false },
       { id: "2", title: "Contains Duplicate", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/contains-duplicate/", leetcodeId: 217, tags: ["Array", "Hash Table", "Sorting"], companies: ["Amazon", "Apple"], acceptance: "61.0%", completed: false },
@@ -71,7 +71,7 @@ const topics: Topic[] = [
     name: "Two Pointers",
     icon: "👆",
     description: "Technique using two pointers to solve array problems",
-    color: "from-violet-500 to-fuchsia-500",
+    color: "from-purple-500 to-pink-500",
     problems: [
       { id: "11", title: "Valid Palindrome", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/valid-palindrome/", leetcodeId: 125, tags: ["Two Pointers", "String"], companies: ["Meta", "Microsoft"], acceptance: "44.2%", completed: false },
       { id: "12", title: "Two Sum II - Input Array Is Sorted", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/", leetcodeId: 167, tags: ["Array", "Two Pointers"], companies: ["Amazon"], acceptance: "60.0%", completed: false },
@@ -88,7 +88,7 @@ const topics: Topic[] = [
     name: "Sliding Window",
     icon: "🪟",
     description: "Window-based technique for substring and subarray problems",
-    color: "from-green-500 to-emerald-600",
+    color: "from-green-500 to-emerald-500",
     problems: [
       { id: "19", title: "Best Time to Buy and Sell Stock", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/", leetcodeId: 121, tags: ["Array", "Dynamic Programming"], companies: ["Amazon", "Meta", "Google"], acceptance: "53.8%", completed: false },
       { id: "20", title: "Longest Substring Without Repeating Characters", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/longest-substring-without-repeating-characters/", leetcodeId: 3, tags: ["Hash Table", "String", "Sliding Window"], companies: ["Amazon", "Meta", "Google"], acceptance: "34.0%", completed: false },
@@ -104,7 +104,7 @@ const topics: Topic[] = [
     name: "Stack",
     icon: "📚",
     description: "LIFO data structure problems",
-    color: "from-violet-500 to-fuchsia-500",
+    color: "from-orange-500 to-red-500",
     problems: [
       { id: "26", title: "Valid Parentheses", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/valid-parentheses/", leetcodeId: 20, tags: ["String", "Stack"], companies: ["Amazon", "Meta", "Google"], acceptance: "40.3%", completed: false },
       { id: "27", title: "Min Stack", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/min-stack/", leetcodeId: 155, tags: ["Stack", "Design"], companies: ["Amazon", "Bloomberg"], acceptance: "52.0%", completed: false },
@@ -139,7 +139,7 @@ const topics: Topic[] = [
     name: "Linked List",
     icon: "🔗",
     description: "Linear data structure with pointers",
-    color: "from-violet-500 to-fuchsia-500",
+    color: "from-indigo-500 to-purple-500",
     problems: [
       { id: "43", title: "Reverse Linked List", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/reverse-linked-list/", leetcodeId: 206, tags: ["Linked List", "Recursion"], companies: ["Amazon", "Microsoft", "Apple"], acceptance: "73.2%", completed: false },
       { id: "44", title: "Merge Two Sorted Lists", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/merge-two-sorted-lists/", leetcodeId: 21, tags: ["Linked List", "Recursion"], companies: ["Amazon", "Microsoft"], acceptance: "62.2%", completed: false },
@@ -158,7 +158,7 @@ const topics: Topic[] = [
     name: "Trees",
     icon: "🌳",
     description: "Binary trees, BST, and tree traversals",
-    color: "from-cyan-500 to-blue-500",
+    color: "from-teal-500 to-green-500",
     problems: [
       { id: "53", title: "Invert Binary Tree", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/invert-binary-tree/", leetcodeId: 226, tags: ["Tree", "DFS", "BFS"], companies: ["Google", "Amazon"], acceptance: "73.5%", completed: false },
       { id: "54", title: "Maximum Depth of Binary Tree", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/maximum-depth-of-binary-tree/", leetcodeId: 104, tags: ["Tree", "DFS", "BFS"], companies: ["Amazon", "Microsoft"], acceptance: "73.9%", completed: false },
@@ -200,7 +200,7 @@ const topics: Topic[] = [
     name: "Dynamic Programming",
     icon: "🧠",
     description: "Optimization through subproblem solutions",
-    color: "from-violet-500 to-fuchsia-500",
+    color: "from-violet-500 to-indigo-500",
     problems: [
       { id: "77", title: "Climbing Stairs", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/climbing-stairs/", leetcodeId: 70, tags: ["Math", "Dynamic Programming", "Memoization"], companies: ["Amazon", "Microsoft"], acceptance: "52.0%", completed: false },
       { id: "78", title: "House Robber", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/house-robber/", leetcodeId: 198, tags: ["Array", "Dynamic Programming"], companies: ["Amazon", "Google"], acceptance: "49.2%", completed: false },
@@ -241,7 +241,7 @@ const topics: Topic[] = [
     name: "Heap / Priority Queue",
     icon: "⛰️",
     description: "Efficient min/max operations",
-    color: "from-cyan-500 to-blue-500",
+    color: "from-sky-500 to-blue-500",
     problems: [
       { id: "100", title: "Kth Largest Element in an Array", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/kth-largest-element-in-an-array/", leetcodeId: 215, tags: ["Array", "Divide and Conquer", "Heap"], companies: ["Meta", "Amazon", "Google"], acceptance: "65.5%", completed: false },
       { id: "101", title: "Last Stone Weight", difficulty: "Easy", leetcodeUrl: "https://leetcode.com/problems/last-stone-weight/", leetcodeId: 1046, tags: ["Array", "Heap"], companies: ["Amazon"], acceptance: "64.5%", completed: false },
@@ -256,7 +256,7 @@ const topics: Topic[] = [
     name: "Intervals",
     icon: "📏",
     description: "Working with ranges and intervals",
-    color: "from-violet-500 to-fuchsia-500",
+    color: "from-fuchsia-500 to-purple-500",
     problems: [
       { id: "106", title: "Merge Intervals", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/merge-intervals/", leetcodeId: 56, tags: ["Array", "Sorting"], companies: ["Meta", "Amazon", "Google"], acceptance: "46.5%", completed: false },
       { id: "107", title: "Insert Interval", difficulty: "Medium", leetcodeUrl: "https://leetcode.com/problems/insert-interval/", leetcodeId: 57, tags: ["Array"], companies: ["Google", "Amazon"], acceptance: "39.0%", completed: false },
@@ -326,7 +326,7 @@ export default function PracticePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
   const [completedProblems, setCompletedProblems] = useState<Set<string>>(new Set());
-  const [expandedTopics, setExpandedTopics] = useState<Set<string>>(new Set());
+  const [expandedTopics, setExpandedTopics] = useState<Set<string>>(new Set(["arrays"]));
   const [showSyncNotification, setShowSyncNotification] = useState(false);
   const [syncMessage, setSyncMessage] = useState('');
 
@@ -413,7 +413,7 @@ export default function PracticePage() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-medium shadow-lg shadow-violet-500/25"
+            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white font-medium shadow-lg shadow-emerald-500/25"
           >
             {syncMessage}
           </motion.div>
@@ -445,7 +445,7 @@ export default function PracticePage() {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
                 <Link href="/" className="flex items-center gap-2 text-slate-900 hover:text-purple-600 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <span className="font-bold text-xl">AlgoBuddy</span>
@@ -464,7 +464,7 @@ export default function PracticePage() {
                   <span className="text-green-400 font-semibold">{completedCount}/{totalProblems}</span>
                   <span className="text-slate-400 text-sm">solved</span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl">
+                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-xl">
                   <Flame className="w-5 h-5 text-orange-400" />
                   <span className="text-orange-400 font-semibold">{Math.round((completedCount / totalProblems) * 100)}%</span>
                 </div>
