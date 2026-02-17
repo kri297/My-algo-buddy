@@ -631,6 +631,37 @@ This reads like English: "Get active users, extract names, join with comma."`
         title: 'Two Sum (Sorted Array)',
         language: 'multi',
         content: {
+          c: `int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    int left = 0;
+    int right = numsSize - 1;
+    int* result = (int*)malloc(2 * sizeof(int));
+    
+    while (left < right) {
+        int sum = nums[left] + nums[right];
+        
+        if (sum == target) {
+            result[0] = left;
+            result[1] = right;
+            *returnSize = 2;
+            return result;  // Found!
+        }
+        
+        if (sum < target) {
+            left++;   // Need bigger sum
+        } else {
+            right--;  // Need smaller sum
+        }
+    }
+    
+    result[0] = -1;
+    result[1] = -1;
+    *returnSize = 2;
+    return result;  // No solution
+}
+
+// Example: [2, 7, 11, 15], target = 9
+// Returns [0, 1] (2 + 7 = 9)
+// Time: O(n), Space: O(1)`,
           javascript: `function twoSum(nums, target) {
   let left = 0;
   let right = nums.length - 1;
@@ -1563,6 +1594,38 @@ public:
         title: 'Binary Tree Implementation',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+TreeNode* createNode(int val) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
+    node->val = val;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// Create a tree:
+//       1
+//      / \\
+//     2   3
+//    / \\
+//   4   5
+int main() {
+    TreeNode* root = createNode(1);
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+    
+    return 0;
+}`,
           javascript: `class TreeNode {
   constructor(val) {
     this.val = val;
@@ -1641,6 +1704,56 @@ root->left->right = new TreeNode(5);`
         title: 'Tree Traversals',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+// Inorder: Left → Root → Right
+void inorder(TreeNode* node) {
+    if (node == NULL) return;
+    inorder(node->left);
+    printf("%d ", node->val);  // 4, 2, 5, 1, 3
+    inorder(node->right);
+}
+
+// Preorder: Root → Left → Right
+void preorder(TreeNode* node) {
+    if (node == NULL) return;
+    printf("%d ", node->val);  // 1, 2, 4, 5, 3
+    preorder(node->left);
+    preorder(node->right);
+}
+
+// Postorder: Left → Right → Root
+void postorder(TreeNode* node) {
+    if (node == NULL) return;
+    postorder(node->left);
+    postorder(node->right);
+    printf("%d ", node->val);  // 4, 5, 2, 3, 1
+}
+
+// Level Order (BFS) - using queue
+#define MAX_QUEUE 100
+void levelOrder(TreeNode* root) {
+    if (root == NULL) return;
+    
+    TreeNode* queue[MAX_QUEUE];
+    int front = 0, rear = 0;
+    queue[rear++] = root;
+    
+    while (front < rear) {
+        TreeNode* node = queue[front++];
+        printf("%d ", node->val);  // 1, 2, 3, 4, 5
+        
+        if (node->left) queue[rear++] = node->left;
+        if (node->right) queue[rear++] = node->right;
+    }
+}`,
           javascript: `// Inorder: Left → Root → Right
 function inorder(node) {
   if (!node) return;
@@ -1835,6 +1948,46 @@ vector<int> levelOrder(TreeNode* root) {
         title: 'Graph Representation',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_NODES 100
+
+// Adjacency List using array of arrays
+typedef struct {
+    int neighbors[MAX_NODES];
+    int count;
+} AdjList;
+
+AdjList graph[MAX_NODES];
+
+void addEdge(int u, int v) {
+    // Add v to u's list
+    graph[u].neighbors[graph[u].count++] = v;
+    // For undirected, add u to v's list too
+    graph[v].neighbors[graph[v].count++] = u;
+}
+
+// Adjacency Matrix
+int matrix[MAX_NODES][MAX_NODES] = {0};
+
+void addEdgeMatrix(int u, int v) {
+    matrix[u][v] = 1;
+    matrix[v][u] = 1;  // For undirected graph
+}
+
+// Example for nodes 0-5
+void initGraph() {
+    // Initialize all counts to 0
+    for (int i = 0; i < MAX_NODES; i++) {
+        graph[i].count = 0;
+    }
+    
+    // Add edges (0=A, 1=B, 2=C, etc.)
+    addEdge(0, 1);  // A-B
+    addEdge(0, 2);  // A-C
+    addEdge(1, 3);  // B-D
+}`,
           javascript: `// Adjacency List (most common)
 const graph = {
   'A': ['B', 'C'],
@@ -1920,6 +2073,60 @@ matrix[0][1] = 1;  // Edge from 0 to 1`
         title: 'BFS & DFS',
         language: 'multi',
         content: {
+          c: `#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_NODES 100
+#define MAX_QUEUE 1000
+
+// Using the AdjList structure from previous example
+extern AdjList graph[MAX_NODES];
+
+// BFS - Level by level, uses Queue
+void bfs(int start, int n) {
+    bool visited[MAX_NODES] = {false};
+    int queue[MAX_QUEUE];
+    int front = 0, rear = 0;
+    
+    visited[start] = true;
+    queue[rear++] = start;
+    
+    printf("BFS: ");
+    while (front < rear) {
+        int node = queue[front++];
+        printf("%d ", node);
+        
+        for (int i = 0; i < graph[node].count; i++) {
+            int neighbor = graph[node].neighbors[i];
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                queue[rear++] = neighbor;
+            }
+        }
+    }
+    printf("\\n");
+}
+
+// DFS - Recursive
+void dfsHelper(int node, bool visited[]) {
+    visited[node] = true;
+    printf("%d ", node);
+    
+    for (int i = 0; i < graph[node].count; i++) {
+        int neighbor = graph[node].neighbors[i];
+        if (!visited[neighbor]) {
+            dfsHelper(neighbor, visited);
+        }
+    }
+}
+
+void dfs(int start, int n) {
+    bool visited[MAX_NODES] = {false};
+    printf("DFS: ");
+    dfsHelper(start, visited);
+    printf("\\n");
+}`,
           javascript: `// BFS - Level by level, uses Queue
 function bfs(graph, start) {
   const visited = new Set([start]);
